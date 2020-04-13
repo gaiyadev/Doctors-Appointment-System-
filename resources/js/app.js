@@ -1,4 +1,4 @@
-require('./bootstrap');
+//require('./bootstrap');
 import Vue from 'vue';
 import router from './router';
 import Toast from "vue-toastification";
