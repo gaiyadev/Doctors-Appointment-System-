@@ -49,6 +49,14 @@ const routes = [
     {
         path: '/add_time',
         component: require('./views/AddTime').default
+    },
+    {
+        path: '/user_change_password',
+        component: require('./views/UserChangePassword').default
+    },
+    {
+        path: '/user_update_profile',
+        component: require('./views/UserProfileUpdate').default
     }
 ]
 
