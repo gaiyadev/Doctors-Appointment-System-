@@ -25,6 +25,30 @@ const routes = [
     {
         path: '/complain',
         component: require('./views/Complain').default
+    },
+    {
+        path: '/add_doctor',
+        component: require('./views/AddDoctor').default
+    },
+    {
+        path: '/doctor_available',
+        component: require('./views/DoctorAvailable').default
+    },
+    {
+        path: '/doctor_calender',
+        component: require('./views/DoctorCalender').default
+    },
+    {
+        path: '/complain_list',
+        component: require('./views/ComplainList').default
+    },
+    {
+        path: '/list_appointment',
+        component: require('./views/ListAppointment').default
+    },
+    {
+        path: '/add_time',
+        component: require('./views/AddTime').default
     }
 ]
 
