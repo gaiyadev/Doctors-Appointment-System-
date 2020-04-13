@@ -6,12 +6,12 @@
     <div class="col-md-9 ml-auto mr-auto mb-3 text-center">
     </div>
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-      <form class="form" method="POST" action="{{ route('login') }}">
+      <form class="form" method="POST" action="{{ route('admin.login') }}">
         @csrf
 
         <div class="card card-login card-hidden mb-3">
           <div class="card-header card-header-primary text-center">
-            <h4 class="card-title"><strong>{{ __('Login') }}</strong></h4>
+            <h4 class="card-title"><strong>{{ __('Admin Login') }}</strong></h4>
             <div class="social-line">
               <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
                 <i class="fa fa-facebook-square"></i>
@@ -73,13 +73,13 @@
       <div class="row">
         <div class="col-6">
             @if (Route::has('password.request'))
-                <a class="text-primary" href="{{ route('password.request') }}" class="text-light">
+                <a class="text-primary" href="{{ route('admin.password.request') }}" class="text-light">
                     <small>{{ __('Forgot password?') }}</small>
                 </a>
             @endif
         </div>
         <div class="col-6 text-right">
-            <a class="text-primary" href="{{ route('register') }}" class="text-light">
+            <a class="text-primary" href="{{ route('admin.register') }}" class="text-light">
                 <small>{{ __('Create new account') }}</small>
             </a>
         </div>
