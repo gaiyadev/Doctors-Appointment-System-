@@ -23,10 +23,11 @@
                 <table class="table">
                   <thead class="text-primary">
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
                     <th>State</th>
-                    <th>City</th>
-                    <th>Doctor</th>
+                    <th>Specailizastion</th>
                     <th>Booked_at</th>
                     <th>Actions</th>
                   </thead>
@@ -36,6 +37,7 @@
                       <td>Dakota Rice</td>
                       <td>Niger</td>
                       <td>Oud-Turnhout</td>
+                      <td class="text-primary">$36,738</td>
                       <td class="text-primary">$36,738</td>
                       <td class="text-primary">$36,738</td>
                       <td class="text-primary">
@@ -70,43 +72,47 @@
           <div class="modal-header"></div>
           <div class="modal-body">
             <div class="card card-nav-tabs">
-              <div class="card-header card-header-primary">Book Appointment</div>
+              <div class="card-header card-header-primary text-uppercase">Add Doctor</div>
               <div class="card-body">
                 <form>
+                  <div class="form-group">
+                    <label for="firstname" class="text-primary">FirstName</label>
+                    <input type="text" class="form-control" id="firstname" name="FirstName" />
+                  </div>
+                  <div class="form-group">
+                    <label for="lastname" class="text-primary">LastName</label>
+                    <input type="text" class="form-control" id="lastname" name="LastName" />
+                  </div>
                   <div class="form-group">
                     <label for="email" class="text-primary">Email Address</label>
                     <input type="email" class="form-control" id="email" name="email" />
                   </div>
                   <div class="form-group">
-                    <label for="doctor" class="text-primary">Select Doctor</label>
+                    <label for="state" class="text-primary">State</label>
                     <select
-                      name="doctor"
+                      name="state"
                       class="form-control selectpicker"
                       data-style="btn btn-link"
-                      id="doctor"
+                      id="state"
                     >
                       <option>1</option>
                       <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="date" class="text-primary">Date</label>
-                    <input type="Date" class="form-control" id="date" name="date" />
+                    <label for="specialization" class="text-primary">Specailizastion</label>
+                    <input
+                      type="Text"
+                      class="form-control"
+                      id="specialization"
+                      name="specialization"
+                    />
                   </div>
-
-                  <div class="form-group">
-                    <label for="time" class="text-primary">Time</label>
-                    <input type="time" class="form-control" id="time" name="time" />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="purpose" class="text-primary">Reason for Appointment</label>
-                    <textarea class="form-control" id="purpose" rows="3"></textarea>
-                  </div>
-                  <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">BOOK</button>
+                  <button
+                    type="submit"
+                    name="submit"
+                    class="btn btn-primary btn-lg btn-block"
+                  >ADD DOCTOR</button>
                 </form>
               </div>
             </div>

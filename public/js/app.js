@@ -5491,9 +5491,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log("Component mounted.");
@@ -5511,9 +5508,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -5634,8 +5628,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -16466,13 +16458,15 @@ var staticRenderFns = [
                     _c("thead", { staticClass: "text-primary" }, [
                       _c("th", [_vm._v("ID")]),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Name")]),
+                      _c("th", [_vm._v("FirstName")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("LastName")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Email")]),
                       _vm._v(" "),
                       _c("th", [_vm._v("State")]),
                       _vm._v(" "),
-                      _c("th", [_vm._v("City")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Doctor")]),
+                      _c("th", [_vm._v("Specailizastion")]),
                       _vm._v(" "),
                       _c("th", [_vm._v("Booked_at")]),
                       _vm._v(" "),
@@ -16488,6 +16482,10 @@ var staticRenderFns = [
                         _c("td", [_vm._v("Niger")]),
                         _vm._v(" "),
                         _c("td", [_vm._v("Oud-Turnhout")]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-primary" }, [
+                          _vm._v("$36,738")
+                        ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "text-primary" }, [
                           _vm._v("$36,738")
@@ -16561,12 +16559,55 @@ var staticRenderFns = [
                   _c("div", { staticClass: "card card-nav-tabs" }, [
                     _c(
                       "div",
-                      { staticClass: "card-header card-header-primary" },
-                      [_vm._v("Book Appointment")]
+                      {
+                        staticClass:
+                          "card-header card-header-primary text-uppercase"
+                      },
+                      [_vm._v("Add Doctor")]
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
                       _c("form", [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "text-primary",
+                              attrs: { for: "firstname" }
+                            },
+                            [_vm._v("FirstName")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "firstname",
+                              name: "FirstName"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "text-primary",
+                              attrs: { for: "lastname" }
+                            },
+                            [_vm._v("LastName")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "lastname",
+                              name: "LastName"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
                           _c(
                             "label",
@@ -16588,9 +16629,9 @@ var staticRenderFns = [
                             "label",
                             {
                               staticClass: "text-primary",
-                              attrs: { for: "doctor" }
+                              attrs: { for: "state" }
                             },
-                            [_vm._v("Select Doctor")]
+                            [_vm._v("State")]
                           ),
                           _vm._v(" "),
                           _c(
@@ -16598,21 +16639,15 @@ var staticRenderFns = [
                             {
                               staticClass: "form-control selectpicker",
                               attrs: {
-                                name: "doctor",
+                                name: "state",
                                 "data-style": "btn btn-link",
-                                id: "doctor"
+                                id: "state"
                               }
                             },
                             [
                               _c("option", [_vm._v("1")]),
                               _vm._v(" "),
-                              _c("option", [_vm._v("2")]),
-                              _vm._v(" "),
-                              _c("option", [_vm._v("3")]),
-                              _vm._v(" "),
-                              _c("option", [_vm._v("4")]),
-                              _vm._v(" "),
-                              _c("option", [_vm._v("5")])
+                              _c("option", [_vm._v("2")])
                             ]
                           )
                         ]),
@@ -16622,46 +16657,18 @@ var staticRenderFns = [
                             "label",
                             {
                               staticClass: "text-primary",
-                              attrs: { for: "date" }
+                              attrs: { for: "specialization" }
                             },
-                            [_vm._v("Date")]
+                            [_vm._v("Specailizastion")]
                           ),
                           _vm._v(" "),
                           _c("input", {
                             staticClass: "form-control",
-                            attrs: { type: "Date", id: "date", name: "date" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "text-primary",
-                              attrs: { for: "time" }
-                            },
-                            [_vm._v("Time")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: { type: "time", id: "time", name: "time" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "text-primary",
-                              attrs: { for: "purpose" }
-                            },
-                            [_vm._v("Reason for Appointment")]
-                          ),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            staticClass: "form-control",
-                            attrs: { id: "purpose", rows: "3" }
+                            attrs: {
+                              type: "Text",
+                              id: "specialization",
+                              name: "specialization"
+                            }
                           })
                         ]),
                         _vm._v(" "),
@@ -16671,7 +16678,7 @@ var staticRenderFns = [
                             staticClass: "btn btn-primary btn-lg btn-block",
                             attrs: { type: "submit", name: "submit" }
                           },
-                          [_vm._v("BOOK")]
+                          [_vm._v("ADD DOCTOR")]
                         )
                       ])
                     ])
@@ -16867,7 +16874,7 @@ var staticRenderFns = [
                     _c(
                       "div",
                       { staticClass: "card-header card-header-primary" },
-                      [_vm._v("Book Appointment")]
+                      [_vm._v("Add Availability")]
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
@@ -16877,49 +16884,15 @@ var staticRenderFns = [
                             "label",
                             {
                               staticClass: "text-primary",
-                              attrs: { for: "email" }
+                              attrs: { for: "time" }
                             },
-                            [_vm._v("Email Address")]
+                            [_vm._v("Time")]
                           ),
                           _vm._v(" "),
                           _c("input", {
                             staticClass: "form-control",
-                            attrs: { type: "email", id: "email", name: "email" }
+                            attrs: { type: "text", id: "time", name: "time" }
                           })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "text-primary",
-                              attrs: { for: "doctor" }
-                            },
-                            [_vm._v("Select Doctor")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "select",
-                            {
-                              staticClass: "form-control selectpicker",
-                              attrs: {
-                                name: "doctor",
-                                "data-style": "btn btn-link",
-                                id: "doctor"
-                              }
-                            },
-                            [
-                              _c("option", [_vm._v("1")]),
-                              _vm._v(" "),
-                              _c("option", [_vm._v("2")]),
-                              _vm._v(" "),
-                              _c("option", [_vm._v("3")]),
-                              _vm._v(" "),
-                              _c("option", [_vm._v("4")]),
-                              _vm._v(" "),
-                              _c("option", [_vm._v("5")])
-                            ]
-                          )
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
@@ -16938,45 +16911,13 @@ var staticRenderFns = [
                           })
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "text-primary",
-                              attrs: { for: "time" }
-                            },
-                            [_vm._v("Time")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: { type: "time", id: "time", name: "time" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "text-primary",
-                              attrs: { for: "purpose" }
-                            },
-                            [_vm._v("Reason for Appointment")]
-                          ),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            staticClass: "form-control",
-                            attrs: { id: "purpose", rows: "3" }
-                          })
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "button",
                           {
                             staticClass: "btn btn-primary btn-lg btn-block",
                             attrs: { type: "submit", name: "submit" }
                           },
-                          [_vm._v("BOOK")]
+                          [_vm._v("ADD")]
                         )
                       ])
                     ])
@@ -17492,13 +17433,15 @@ var staticRenderFns = [
                   _c("thead", { staticClass: "text-primary" }, [
                     _c("th", [_vm._v("ID")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("Name")]),
+                    _c("th", [_vm._v("FirstName")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("LastName")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Email")]),
                     _vm._v(" "),
                     _c("th", [_vm._v("State")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("City")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Office")]),
+                    _c("th", [_vm._v("Complain")]),
                     _vm._v(" "),
                     _c("th", [_vm._v("Booked_at")])
                   ]),
@@ -17522,18 +17465,7 @@ var staticRenderFns = [
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-primary" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-info",
-                            attrs: { type: "button" }
-                          },
-                          [
-                            _c("span", { staticClass: "material-icons" }, [
-                              _vm._v("create")
-                            ])
-                          ]
-                        )
+                        _vm._v("$36,738")
                       ])
                     ])
                   ])
@@ -17755,15 +17687,17 @@ var staticRenderFns = [
                   _c("thead", { staticClass: "text-primary" }, [
                     _c("th", [_vm._v("ID")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("Name")]),
+                    _c("th", [_vm._v("FirstName")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("LastName")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Email")]),
                     _vm._v(" "),
                     _c("th", [_vm._v("State")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("City")]),
+                    _c("th", [_vm._v("Specailizastion")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("Office")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Booked_at")])
+                    _c("th", [_vm._v("Time")])
                   ]),
                   _vm._v(" "),
                   _c("tbody", [
@@ -17785,18 +17719,7 @@ var staticRenderFns = [
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-primary" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-info",
-                            attrs: { type: "button" }
-                          },
-                          [
-                            _c("span", { staticClass: "material-icons" }, [
-                              _vm._v("create")
-                            ])
-                          ]
-                        )
+                        _vm._v("$36,738")
                       ])
                     ])
                   ])
@@ -18066,15 +17989,17 @@ var staticRenderFns = [
                   _c("thead", { staticClass: "text-primary" }, [
                     _c("th", [_vm._v("ID")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("Name")]),
+                    _c("th", [_vm._v("FirstName")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("LastName")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Email")]),
                     _vm._v(" "),
                     _c("th", [_vm._v("State")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("City")]),
+                    _c("th", [_vm._v("Specialization")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("Office")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Booked_at")])
+                    _c("th", [_vm._v("Time")])
                   ]),
                   _vm._v(" "),
                   _c("tbody", [
@@ -18095,20 +18020,9 @@ var staticRenderFns = [
                         _vm._v("$36,738")
                       ]),
                       _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-info",
-                            attrs: { type: "button" }
-                          },
-                          [
-                            _c("span", { staticClass: "material-icons" }, [
-                              _vm._v("create")
-                            ])
-                          ]
-                        )
-                      ])
+                      _c("td", { staticClass: "text-primary" }),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-primary" })
                     ])
                   ])
                 ])

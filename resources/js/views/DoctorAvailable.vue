@@ -12,11 +12,12 @@
               <table class="table">
                 <thead class="text-primary">
                   <th>ID</th>
-                  <th>Name</th>
+                  <th>FirstName</th>
+                  <th>LastName</th>
+                  <th>Email</th>
                   <th>State</th>
-                  <th>City</th>
-                  <th>Office</th>
-                  <th>Booked_at</th>
+                  <th>Specailizastion</th>
+                  <th>Time</th>
                 </thead>
                 <tbody>
                   <tr>
@@ -26,11 +27,7 @@
                     <td>Oud-Turnhout</td>
                     <td class="text-primary">$36,738</td>
                     <td class="text-primary">$36,738</td>
-                    <td class="text-primary">
-                      <button type="button" class="btn btn-info">
-                        <span class="material-icons">create</span>
-                      </button>
-                    </td>
+                    <td class="text-primary">$36,738</td>
                   </tr>
                 </tbody>
               </table>

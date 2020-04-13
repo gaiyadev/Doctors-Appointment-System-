@@ -70,43 +70,19 @@
           <div class="modal-header"></div>
           <div class="modal-body">
             <div class="card card-nav-tabs">
-              <div class="card-header card-header-primary">Book Appointment</div>
+              <div class="card-header card-header-primary">Add Availability</div>
               <div class="card-body">
                 <form>
                   <div class="form-group">
-                    <label for="email" class="text-primary">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" />
-                  </div>
-                  <div class="form-group">
-                    <label for="doctor" class="text-primary">Select Doctor</label>
-                    <select
-                      name="doctor"
-                      class="form-control selectpicker"
-                      data-style="btn btn-link"
-                      id="doctor"
-                    >
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
+                    <label for="time" class="text-primary">Time</label>
+                    <input type="text" class="form-control" id="time" name="time" />
                   </div>
                   <div class="form-group">
                     <label for="date" class="text-primary">Date</label>
                     <input type="Date" class="form-control" id="date" name="date" />
                   </div>
 
-                  <div class="form-group">
-                    <label for="time" class="text-primary">Time</label>
-                    <input type="time" class="form-control" id="time" name="time" />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="purpose" class="text-primary">Reason for Appointment</label>
-                    <textarea class="form-control" id="purpose" rows="3"></textarea>
-                  </div>
-                  <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">BOOK</button>
+                  <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">ADD</button>
                 </form>
               </div>
             </div>
