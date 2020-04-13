@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Patient Dashboard by Creative Tim
+    Admin Dashboard by Creative Tim
   </title>
       <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
@@ -34,14 +34,14 @@
               <p>Dashboard</p>
             </router-link>
           </li> 
-      @include('includes.sidebar')
+      @include('includes.adminSide')
     <div class="main-panel">
       <!-- Navbar -->
-         @include('includes.navbar')
+         @include('includes.adminNavbar')
       <!-- End Navbar -->
       <div class="content" >
         <div class="container-fluid">  
-        <h4  class="text-primary">Welcome {{ Auth::user()->name }}  </h4>    
+        <h4 class="text-primary">Welcome {{ Auth::user()->firstname }}  </h4>    
      <transition>
       <router-view></router-view>
        </transition>

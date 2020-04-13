@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="card-body">
-            <p class="card-description text-center">{{ __('Or Sign in with ') }} <strong>gaiyadev.ng@gmail.com</strong> {{ __(' and the password ') }}<strong>12345678</strong> </p>
+            <p class="card-description text-center">{{ __('Or Sign in with ') }} <strong>admin@gmail.com</strong> {{ __(' and the password ') }}<strong>12345678</strong> </p>
             <div class="bmd-form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -33,7 +33,7 @@
                     <i class="material-icons">email</i>
                   </span>
                 </div>
-                <input type="email" name="email" class="form-control" placeholder="{{ __('Email...') }}" value="{{ old('email', 'gaiyadev.ng@gmail.com') }}" required>
+                <input type="email" name="email" class="form-control" placeholder="{{ __('Email...') }}" value="{{ old('email', 'admin@gmail.com') }}" required>
               </div>
               @if ($errors->has('email'))
                 <div id="email-error" class="error text-danger pl-3" for="email" style="display: block;">

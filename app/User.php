@@ -36,4 +36,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     public function setNameAttribute($value) {
+        $this->attributes['name'] = ucfirst($value);
+    }  
+   
+    //accessor
+    public function getNameAttribute($value) {
+    return strtoupper($value);
+    }
+
+    // public function setPasswordAttribute($value) {
+    //     $this->attributes['password'] = Hash::make($value);
+    // }
 }

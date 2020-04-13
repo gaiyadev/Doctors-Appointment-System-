@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\Admin;
+use App\User;
+
 
 class LoginController extends Controller
-{
+{ 
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -41,5 +45,11 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest:admin')->except('logout');
+    }
+
+     //need to be check
+    protected function guard()
+    {
+        return Auth::guard('admin');
     }
 }
