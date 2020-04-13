@@ -5539,6 +5539,282 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/BookAppointment.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/BookAppointment.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      //editMode: false,
+      appointment: {},
+      form: new Form({
+        id: "",
+        email: "",
+        doctor: "",
+        date: "",
+        time: "",
+        purpose: ""
+      })
+    };
+  },
+  methods: {
+    // updateAppointment() {
+    //   this.$Progress.start();
+    //   this.form
+    //     .put("api/appointment/" + this.form.id)
+    //     .then(() => {
+    //       this.$Progress.finish();
+    //       Fire.$emit("AfterUpdated");
+    //     })
+    //     .catch(() => {
+    //       this.$Progress.fail();
+    //     });
+    // },
+    // editModal(post) {
+    //   this.editMode = true;
+    //   this.form.reset();
+    //   $("#exampleModal").modal("show");
+    //   this.form.fill(post);
+    // },
+    //add modal
+    // newModal() {
+    //   this.editMode = false;
+    //   this.form.reset();
+    //   $("#exampleModal").modal("show");
+    // },
+    createAppointment: function createAppointment() {
+      var _this = this;
+
+      this.$Progress.start();
+      this.form.post("api/appointment").then(function () {
+        _this.$Progress.finish;
+
+        _this.$notification.success("Post addes successfully", {
+          timer: 10
+        });
+      })["catch"](function () {
+        _this.$Progress.fail;
+      }); // $("#exampleModal").modal("hide");
+
+      this.form.reset();
+      Fire.$emit("AfterCreated");
+    } // loadAppointment() {
+    //   axios
+    //     .get("api/appointment")
+    //     .then(({ data }) => (this.posts = data))
+    //     .catch(() => {
+    //       this.$Progress.fail();
+    //     });
+    // },
+    // deleteAppointment(id) {
+    //   this.$Progress.start();
+    //   Swal.fire({
+    //     title: "Are you sure?",
+    //     text: "You won't be able to revert this!",
+    //     icon: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: "Yes, delete it!"
+    //   }).then(result => {
+    //     //send ajax delete request
+    //     this.form
+    //       .delete("api/appointment/" + id)
+    //       .then(() => {
+    //         if (result.value) {
+    //           Swal.fire("Deleted!", "Your file has been deleted.", "success");
+    //           this.$Progress.finish();
+    //           Fire.$emit("AfterDeleted");
+    //         }
+    //       })
+    //       .catch(() => {
+    //         //Swal.fire("failed!", "Someting went wrong.", "warning");
+    //       });
+    //   });
+    // }
+
+  } // mounted() {
+  //   this.loadAppointment();
+  //   Fire.$on("AfterCreated", () => {
+  //     this.loadAppointment();
+  //   });
+  //   Fire.$on("AfterDeleted", () => {
+  //     this.loadAppointment();
+  //   });
+  //   Fire.$on("AfterUpdated", () => {
+  //     this.loadAppointment();
+  //   });
+  // }
+
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Calender.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Calender.vue?vue&type=script&lang=js& ***!
@@ -17782,78 +18058,310 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "card-body" }, [
-                    _c("form", [
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "text-primary",
-                              attrs: { for: "email" }
-                            },
-                            [_vm._v("Email Address")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.ceateAppointment($event)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
                               {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.email,
-                                expression: "form.email"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("email")
-                            },
-                            attrs: {
-                              type: "email",
-                              id: "email",
-                              name: "email"
-                            },
-                            domProps: { value: _vm.form.email },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                                staticClass: "text-primary",
+                                attrs: { for: "email" }
+                              },
+                              [_vm._v("Email Address")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.email,
+                                  expression: "form.email"
                                 }
-                                _vm.$set(_vm.form, "email", $event.target.value)
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("email")
+                              },
+                              attrs: {
+                                type: "email",
+                                id: "email",
+                                name: "email"
+                              },
+                              domProps: { value: _vm.form.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                }
                               }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "email" }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary btn-lg btn-block",
-                          attrs: { type: "submit", name: "submit" }
-                        },
-                        [_vm._v("BOOK")]
-                      )
-                    ])
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "email" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "text-primary",
+                                attrs: { for: "doctor" }
+                              },
+                              [_vm._v("Select Doctor")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.doctor,
+                                    expression: "form.doctor"
+                                  }
+                                ],
+                                staticClass: "form-control selectpicker",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has("doctor")
+                                },
+                                attrs: {
+                                  name: "doctor",
+                                  "data-style": "btn btn-link",
+                                  id: "doctor"
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.form,
+                                      "doctor",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("option", [_vm._v("1")]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("2")]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("3")]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("4")]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("5")])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "doctor" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "text-primary",
+                                attrs: { for: "date", name: "date" }
+                              },
+                              [_vm._v("Date")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.date,
+                                  expression: "form.date"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("date")
+                              },
+                              attrs: { type: "Date", id: "date", name: "date" },
+                              domProps: { value: _vm.form.date },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "date",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "date" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "text-primary",
+                                attrs: { for: "time" }
+                              },
+                              [_vm._v("Time")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.time,
+                                  expression: "form.time"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("time")
+                              },
+                              attrs: { type: "time", id: "time", name: "time" },
+                              domProps: { value: _vm.form.time },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "time",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "time" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "text-primary",
+                                attrs: { for: "purpose" }
+                              },
+                              [_vm._v("Reason for Appointment")]
+                            ),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.purpose,
+                                  expression: "form.purpose"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("purpose")
+                              },
+                              attrs: {
+                                name: "purpose",
+                                id: "purpose",
+                                rows: "3"
+                              },
+                              domProps: { value: _vm.form.purpose },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "purpose",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "purpose" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary btn-lg btn-block",
+                            attrs: { type: "submit", name: "submit" }
+                          },
+                          [_vm._v("BOOK")]
+                        )
+                      ]
+                    )
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(5)
+              _vm._m(1)
             ])
           ]
         )
@@ -17969,80 +18477,6 @@ var staticRenderFns = [
           ])
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "text-primary", attrs: { for: "doctor" } }, [
-        _vm._v("Select Doctor")
-      ]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass: "form-control selectpicker",
-          attrs: { name: "doctor", "data-style": "btn btn-link", id: "doctor" }
-        },
-        [
-          _c("option", [_vm._v("1")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("2")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("3")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("4")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("5")])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "text-primary", attrs: { for: "date" } }, [
-        _vm._v("Date")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "Date", id: "date", name: "date" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "text-primary", attrs: { for: "time" } }, [
-        _vm._v("Time")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "time", id: "time", name: "time" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "text-primary", attrs: { for: "purpose" } }, [
-        _vm._v("Reason for Appointment")
-      ]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "purpose", rows: "3" }
-      })
     ])
   },
   function() {
@@ -36254,15 +36688,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BookAppointment_vue_vue_type_template_id_291b8d27___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookAppointment.vue?vue&type=template&id=291b8d27& */ "./resources/js/views/BookAppointment.vue?vue&type=template&id=291b8d27&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _BookAppointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookAppointment.vue?vue&type=script&lang=js& */ "./resources/js/views/BookAppointment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BookAppointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _BookAppointment_vue_vue_type_template_id_291b8d27___WEBPACK_IMPORTED_MODULE_0__["render"],
   _BookAppointment_vue_vue_type_template_id_291b8d27___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -36276,6 +36712,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/views/BookAppointment.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/BookAppointment.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/views/BookAppointment.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookAppointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./BookAppointment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/BookAppointment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookAppointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
