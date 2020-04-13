@@ -31,6 +31,7 @@ Route::POST('slogin', 'Admin\LoginController@login')->name('admin.login');
 Route::POST('admin-password/email', 'Admin\ResetPasswordController@sendRequestLinkEmail')->name('admin.password.email');
 
 
+Route::get('admin-register', 'Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.register');
 Route::get('admin-password/reset', 'Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
 //next
 Route::POST('admin-password/reset', 'Admin\ResetPasswordController@reset')->name('admin.password.update');

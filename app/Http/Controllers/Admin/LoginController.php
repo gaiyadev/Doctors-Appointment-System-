@@ -28,6 +28,11 @@ class LoginController extends Controller
      */
     protected $redirectTo =  'admin/home';  //RouteServiceProvider::HOME;
 
+     public function showLoginForm()
+    {
+        return view('admin.login');
+    }
+
     /**
      * Create a new controller instance.
      *
