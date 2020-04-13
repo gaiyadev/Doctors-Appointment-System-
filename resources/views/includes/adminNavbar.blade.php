@@ -52,8 +52,8 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                  <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#">Change Password</a>
+                  <router-link class="dropdown-item" to="/admin_update_profile">Update Profile</router-link>
+                  <router-link class="dropdown-item" to="/admin_change_password">Change Password</router-link>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();"

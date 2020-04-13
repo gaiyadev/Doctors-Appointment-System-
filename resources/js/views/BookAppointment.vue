@@ -75,7 +75,15 @@
                 <form>
                   <div class="form-group">
                     <label for="email" class="text-primary">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" />
+                    <input
+                      v-model="form.email"
+                      type="email"
+                      class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('email') }"
+                      id="email"
+                      name="email"
+                    />
+                    <has-error :form="form" field="email"></has-error>
                   </div>
                   <div class="form-group">
                     <label for="doctor" class="text-primary">Select Doctor</label>

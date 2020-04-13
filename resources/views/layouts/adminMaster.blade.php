@@ -29,7 +29,7 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active  ">
-            <router-link class="nav-link" to="/dashboard">
+            <router-link class="nav-link" to="/admin_dashboard">
               <i class="material-icons">dashboard </i>
               <p>Dashboard</p>
             </router-link>

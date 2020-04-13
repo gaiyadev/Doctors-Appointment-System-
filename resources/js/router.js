@@ -57,20 +57,26 @@ const routes = [
     {
         path: '/user_update_profile',
         component: require('./views/UserProfileUpdate').default
-    }
+    },
+    {
+        path: '/admin_update_profile',
+        component: require('./views/AdminProfileUpdate').default
+    },
+    {
+        path: '/admin_change_password',
+        component: require('./views/AdminChangePassword').default
+    },
+    {
+        path: '/admin_dashboard',
+        component: require('./views/AdminDashboard').default
+    },
 ]
 
-// const router = new VueRouter({
-//     mode: 'history',
-//     //base: process.env.BASE_URL,
-//     routes
-// })
 
-// export default router
+
 
 export default new VueRouter({
     mode: 'history',
-    //base: process.env.BASE_URL,
     routes
 });
 
