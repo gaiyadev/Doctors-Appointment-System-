@@ -5754,15 +5754,14 @@ __webpack_require__.r(__webpack_exports__);
       this.form.post("api/appointment").then(function () {
         _this.$Progress.finish;
 
-        _this.$notification.success("Post addes successfully", {
-          timer: 10
-        });
+        _this.$toast.success("Appointment booked succesfully");
       })["catch"](function () {
         _this.$Progress.fail;
-      }); // $("#exampleModal").modal("hide");
 
+        _this.$toast.error("Oops, please field the form again");
+      });
       this.form.reset();
-      Fire.$emit("AfterCreated");
+      $("#bookModal").modal("hide"); // Fire.$emit("AfterCreated");
     } // loadAppointment() {
     //   axios
     //     .get("api/appointment")
@@ -18064,7 +18063,7 @@ var render = function() {
                         on: {
                           submit: function($event) {
                             $event.preventDefault()
-                            return _vm.ceateAppointment($event)
+                            return _vm.createAppointment($event)
                           }
                         }
                       },
@@ -18271,7 +18270,7 @@ var render = function() {
                               class: {
                                 "is-invalid": _vm.form.errors.has("time")
                               },
-                              attrs: { type: "time", id: "time", name: "time" },
+                              attrs: { type: "text", id: "time", name: "time" },
                               domProps: { value: _vm.form.time },
                               on: {
                                 input: function($event) {
@@ -36186,7 +36185,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 
 var options = {
   // You can set your default options here
-  timeout: 1000,
+  timeout: 3500,
   draggable: true,
   closeOnClick: false
 };

@@ -72,7 +72,7 @@
             <div class="card card-nav-tabs">
               <div class="card-header card-header-primary">Book Appointment</div>
               <div class="card-body">
-                <form @submit.prevent=" ceateAppointment ">
+                <form @submit.prevent="createAppointment">
                   <div class="form-group">
                     <label for="email" class="text-primary">Email Address</label>
                     <input
@@ -119,7 +119,7 @@
                   <div class="form-group">
                     <label for="time" class="text-primary">Time</label>
                     <input
-                      type="time"
+                      type="text"
                       v-model="form.time"
                       class="form-control"
                       :class="{ 'is-invalid': form.errors.has('time') }"
@@ -205,14 +205,15 @@ export default {
         .post("api/appointment")
         .then(() => {
           this.$Progress.finish;
-          this.$notification.success("Post addes successfully", { timer: 10 });
+          this.$toast.success("Appointment booked succesfully");
         })
         .catch(() => {
           this.$Progress.fail;
+          this.$toast.error("Oops, please field the form again");
         });
-      // $("#exampleModal").modal("hide");
       this.form.reset();
-      Fire.$emit("AfterCreated");
+      $("#bookModal").modal("hide");
+      // Fire.$emit("AfterCreated");
     }
     // loadAppointment() {
     //   axios

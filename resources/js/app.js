@@ -16,7 +16,7 @@ Vue.use(VueRouter);
 
 const options = {
     // You can set your default options here
-    timeout: 1000,
+    timeout: 3500,
     draggable: true,
     closeOnClick: false,
 };

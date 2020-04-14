@@ -39,6 +39,10 @@ Route::POST('admin-password/reset', 'Admin\ResetPasswordController@reset')->name
 Route::get('admin-password/reset/{token}', 'Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
 
 
+//api calls for appointment
+Route::post('api/appointment', 'AppointmentController@store');
+
+
 
 Route::get('/{any}', 'HomeController@index')->where('path', ' ([A-z\d-\/_.]+)?');
 
