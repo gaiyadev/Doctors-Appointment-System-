@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use\App\Appointment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
 
 
 
@@ -16,7 +18,8 @@ class AppointmentController extends Controller
     }
 
     public function index() {
-        return Appointment::orderBy('id', 'asc')->paginate(4);
+    $user = Auth::user()->id;
+        return Appointment::where('user_id', $user)->orderBy('id', 'asc')->paginate(4);
     }
 
      // Saving to database

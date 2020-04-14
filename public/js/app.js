@@ -6425,10 +6425,12 @@ __webpack_require__.r(__webpack_exports__);
         _this.$Progress.finish;
 
         _this.$toast.success("Password changed succesfully");
+
+        _this.form.reset();
       })["catch"](function () {
         _this.$Progress.fail;
 
-        _this.$toast.error("Oops, please field the form again");
+        _this.$toast.error("Oops, please correct the errors and try again");
       });
     }
   },

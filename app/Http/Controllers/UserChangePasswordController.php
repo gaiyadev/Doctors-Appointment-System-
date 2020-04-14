@@ -23,8 +23,7 @@ class UserChangePasswordController extends Controller
 
 
     public function changePassword(Request $request)
-    {
-    try {           
+    {          
        
       $this->validate($request, [
             'old_password' => ['required','min:8'],
@@ -35,26 +34,19 @@ class UserChangePasswordController extends Controller
         //getting the password of the currently login user
         $hashPassword = Auth::user()->password;
         if (Hash::check($request->old_password, $hashPassword)) {
-            if(strcmp($request->get('old_password'), $request->get('password')) == 0){
+           if(Hash::check($request->password, $hashPassword)){
                 //Current password and new password are same
-                  return ['message' => 'new password is the same with the current'];
-                //return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
-            } else {
+                 // return ['message' => 'new password is the same with the current'];
+                 return response()->json(['error' => ['current' => ['new password is the same with the current password']]], 422);
+            }else {
                $user = User::find(Auth::id());
                 $user->password = $request->password;
-               // print($user->password); die();
                 $user->save();
-                Auth::logout();
-                  return ['message' => 'Password changeed succedssfully'];
-               // return redirect()->route('Admin')->with('success', 'Password changed successfully');
-            }
+                Auth::logout(); 
+                return ['message' => 'Password changeed successfully'];  
+               }
         }else {
-             return ['message' => 'current password is not d same'];
-           // return redirect()->back()->with('error', 'Current Password is not correct. Please try again');
+          return response()->json(['error' => ['current' => ['Old password is not the same with the one in the database']] ], 422);
         }
-    } catch (Exception $ex) {
-     echo "<p><strong>Caught exception:</strong></p> ", $ex->getMessage(), "\n";
-
-    }
-}//end
+}
 }

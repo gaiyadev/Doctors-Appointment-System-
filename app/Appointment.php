@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\User;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,8 +12,12 @@ class Appointment extends Model
      *
      * @var array
      */
-    // protected $fillable = [
-    //     'doctor', 'email', 'purpose', 'date', 'time',
-    // ];
+    protected $fillable = [
+        'doctor', 'email', 'purpose', 'date', 'time',
+    ];
+
+    public function user () {
+    	return $this->belongsTo('App\User');
+    }
 
 }

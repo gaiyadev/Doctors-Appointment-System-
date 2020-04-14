@@ -93,10 +93,11 @@ export default {
         .then(() => {
           this.$Progress.finish;
           this.$toast.success("Password changed succesfully");
+          this.form.reset();
         })
         .catch(() => {
           this.$Progress.fail;
-          this.$toast.error("Oops, please field the form again");
+          this.$toast.error("Oops, please correct the errors and try again");
         });
     }
   },

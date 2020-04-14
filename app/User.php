@@ -51,4 +51,11 @@ class User extends Authenticatable
     public function setPasswordAttribute($value) {
         $this->attributes['password'] = Hash::make($value);
     }
+
+    
+//relationship method naming must be single
+    public function Appointment() {
+        return $this->hasMany('App\Appointment');
+    }
+    
 }

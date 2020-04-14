@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use\App\Complain;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
 
 class ComplainController extends Controller
 {
 
     public function index() {
-        return Complain::orderBy('id', 'asc')->paginate(90);
+         $user = Auth::user()->id;
+        return Complain::where('user_id', $user)->orderBy('id', 'asc')->paginate(4);
+        //return Complain::orderBy('id', 'asc')->paginate(90);
     }
     
      // Saving to database
@@ -34,6 +38,7 @@ class ComplainController extends Controller
     
       public function destroy($id)
     {
+        
         $Complain =  Complain::find($id);
         $Complain->delete();
         return ['message' => 'Complaint Deleted'];
