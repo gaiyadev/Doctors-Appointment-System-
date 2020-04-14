@@ -5924,9 +5924,158 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      complains: {},
+      form: new Form({
+        id: "",
+        subject: "",
+        complain: ""
+      })
+    };
+  },
+  methods: {
+    complain: function complain() {
+      var _this = this;
+
+      this.$Progress.start();
+      this.form.post("api/complain").then(function () {
+        _this.$Progress.finish;
+
+        _this.$toast.success("Complain Made succesfully");
+
+        $("#bookModal").modal("hide");
+
+        _this.form.reset();
+      })["catch"](function () {
+        _this.$Progress.fail;
+
+        _this.$toast.error("Oops, please field the form again");
+      }); // this.form.reset();
+      // Fire.$emit("AfterCreated");
+    },
+    loadComplain: function loadComplain() {
+      var _this2 = this;
+
+      axios.get("api/complain").then(function (_ref) {
+        var data = _ref.data;
+        return _this2.complains = data.data;
+      })["catch"](function () {
+        _this2.$Progress.fail();
+
+        Fire.$emit("AfterCreated");
+
+        _this2.$toast.error("Oops, something went wrong, fail to load appoimtments");
+      });
+    },
+    deleteComplain: function deleteComplain(id) {
+      var _this3 = this;
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(function (result) {
+        if (result.value) {
+          _this3.form["delete"]("api/complain/" + id).then(function () {
+            _this3.$toast.success("Complain Deleted succesfully");
+          })["catch"](function () {
+            _this3.$toast.error("Oops, something went wrong, fail to delete appoimtments");
+          });
+
+          _this3.$Progress.finish();
+
+          Fire.$emit("AfterDeleted");
+        }
+      });
+    }
+  },
   mounted: function mounted() {
-    console.log("Component mounted.");
+    var _this4 = this;
+
+    this.loadComplain();
+    Fire.$on("AfterCreated", function () {
+      _this4.loadComplain(); //to listen to component before updating
+
+    });
   }
 });
 
@@ -66924,17 +67073,243 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        attrs: { type: "button" },
-        on: { click: _vm.newModal }
-      },
-      [_c("span", { staticClass: "material-icons" }, [_vm._v("add_circle")])]
-    ),
+    _c("div", { staticClass: "card" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "table-responsive" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: {
+                type: "button",
+                "data-toggle": "modal",
+                "data-target": "#bookModal"
+              }
+            },
+            [_vm._v("Launch complain form")]
+          ),
+          _vm._v(" "),
+          _c("table", { staticClass: "table" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.complains, function(complain) {
+                return _c("tr", { key: complain.id }, [
+                  _c("td", [_vm._v(_vm._s(complain.id))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(complain.email))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm._f("uppercase")(complain.subject)))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm._f("date")(complain.complain)))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm._f("date")(complain.created_at)))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-primary" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteComplain(complain.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("span", { staticClass: "material-icons" }, [
+                          _vm._v("remove_circle")
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ])
+    ]),
     _vm._v(" "),
-    _vm._m(0)
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "bookModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "card card-nav-tabs" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "card-header card-header-primary text-uppercase"
+                    },
+                    [_vm._v("Complain Form")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.complain($event)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "text-primary",
+                                attrs: { for: "subject" }
+                              },
+                              [_vm._v("Subject")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.subject,
+                                  expression: "form.subject"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("subject")
+                              },
+                              attrs: {
+                                type: "text",
+                                id: "subject",
+                                name: "subject",
+                                placeholder: "Enter subject"
+                              },
+                              domProps: { value: _vm.form.subject },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "subject",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "subject" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "text-primary",
+                                attrs: { for: "purpose" }
+                              },
+                              [_vm._v("Complain")]
+                            ),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.complain,
+                                  expression: "form.complain"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("subject")
+                              },
+                              attrs: {
+                                name: "complain",
+                                id: "purpose",
+                                rows: "3"
+                              },
+                              domProps: { value: _vm.form.complain },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "complain",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "complain" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary btn-lg",
+                            attrs: { type: "submit", name: "submit" }
+                          },
+                          [_vm._v("Send")]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -66942,57 +67317,72 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card card-nav-tabs" }, [
+    return _c("div", { staticClass: "card-header card-header-primary" }, [
+      _c("h4", { staticClass: "card-title text-uppercase" }, [
+        _vm._v("Complain Table")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-category" }, [
+        _vm._v("Here is a list of your Complain")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "text-primary" }, [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Subject")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Complain")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Booked_at")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Actions")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
       _c(
-        "div",
-        { staticClass: "card-header card-header-primary text-uppercase" },
-        [_vm._v("Complain Form")]
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("form", [
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "label",
-              { staticClass: "text-primary", attrs: { for: "subject" } },
-              [_vm._v("Subject")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "email",
-                id: "subject",
-                name: "subject",
-                "aria-describedby": "emailHelp",
-                placeholder: "Enter email"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "label",
-              { staticClass: "text-primary", attrs: { for: "purpose" } },
-              [_vm._v("Complain")]
-            ),
-            _vm._v(" "),
-            _c("textarea", {
-              staticClass: "form-control",
-              attrs: { name: "subject", id: "purpose", rows: "3" }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-lg",
-              attrs: { type: "submit", name: "submit" }
-            },
-            [_vm._v("Send")]
-          )
-        ])
-      ])
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Save changes")]
+      )
     ])
   }
 ]

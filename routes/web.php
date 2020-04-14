@@ -45,6 +45,11 @@ Route::get('api/appointment', 'AppointmentController@index');
 Route::delete('api/appointment/{id}', 'AppointmentController@destroy');
 Route::put('api/appointment/{id}', 'AppointmentController@update');
 
+//complain
+Route::post('api/complain', 'ComplainController@store');
+Route::get('api/complain', 'ComplainController@index');
+Route::delete('api/complain/{id}', 'ComplainController@destroy');
+
 
 
 Route::get('/{any}', 'HomeController@index')->where('path', ' ([A-z\d-\/_.]+)?');
