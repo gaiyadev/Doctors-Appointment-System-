@@ -5801,7 +5801,6 @@ __webpack_require__.r(__webpack_exports__);
     deleteAppointment: function deleteAppointment(id) {
       var _this4 = this;
 
-      this.$Progress.start();
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -5811,19 +5810,22 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
-        _this4.form["delete"]("api/appointment/" + id).then(function () {
-          if (result.value) {
-            Swal.fire("Deleted!", "Your appointment has been deleted.", "success");
+        if (result.value) {
+          _this4.form["delete"]("api/appointment/" + id).then(function () {
+            // Swal.fire(
+            //   "Deleted!",
+            //   "Your appointment has been deleted.",
+            //   "success"
+            // );
+            _this4.$toast.success("Appointment Deleted succesfully");
+          })["catch"](function () {
+            _this4.$toast.error("Oops, something went wrong, fail to delete appoimtments");
+          });
 
-            _this4.$Progress.finish();
+          _this4.$Progress.finish();
 
-            Fire.$emit("AfterDeleted");
-          } else {
-            result.dismiss === Swal.DismissReason.cancel;
-          }
-        })["catch"](function () {
-          _this4.$toast.error("Oops, something went wrong, fail to delete appoimtments");
-        });
+          Fire.$emit("AfterDeleted");
+        }
       });
     }
   },
@@ -5889,6 +5891,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -66918,64 +66923,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: { type: "button" },
+        on: { click: _vm.newModal }
+      },
+      [_c("span", { staticClass: "material-icons" }, [_vm._v("add_circle")])]
+    ),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card card-nav-tabs" }, [
-        _c(
-          "div",
-          { staticClass: "card-header card-header-primary text-uppercase" },
-          [_vm._v("Complain Form")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("form", [
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                { staticClass: "text-primary", attrs: { for: "subject" } },
-                [_vm._v("Subject")]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "email",
-                  id: "subject",
-                  name: "subject",
-                  "aria-describedby": "emailHelp",
-                  placeholder: "Enter email"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                { staticClass: "text-primary", attrs: { for: "purpose" } },
-                [_vm._v("Complain")]
-              ),
-              _vm._v(" "),
-              _c("textarea", {
-                staticClass: "form-control",
-                attrs: { name: "subject", id: "purpose", rows: "3" }
-              })
-            ]),
-            _vm._v(" "),
+    return _c("div", { staticClass: "card card-nav-tabs" }, [
+      _c(
+        "div",
+        { staticClass: "card-header card-header-primary text-uppercase" },
+        [_vm._v("Complain Form")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("form", [
+          _c("div", { staticClass: "form-group" }, [
             _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-lg",
-                attrs: { type: "submit", name: "submit" }
-              },
-              [_vm._v("Send")]
-            )
-          ])
+              "label",
+              { staticClass: "text-primary", attrs: { for: "subject" } },
+              [_vm._v("Subject")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "email",
+                id: "subject",
+                name: "subject",
+                "aria-describedby": "emailHelp",
+                placeholder: "Enter email"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "label",
+              { staticClass: "text-primary", attrs: { for: "purpose" } },
+              [_vm._v("Complain")]
+            ),
+            _vm._v(" "),
+            _c("textarea", {
+              staticClass: "form-control",
+              attrs: { name: "subject", id: "purpose", rows: "3" }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-lg",
+              attrs: { type: "submit", name: "submit" }
+            },
+            [_vm._v("Send")]
+          )
         ])
       ])
     ])

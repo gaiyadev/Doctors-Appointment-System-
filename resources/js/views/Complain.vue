@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <button type="button" @click="newModal" class="btn btn-primary">
+      <span class="material-icons">add_circle</span>
+    </button>
     <div class="card card-nav-tabs">
       <div class="card-header card-header-primary text-uppercase">Complain Form</div>
       <div class="card-body">

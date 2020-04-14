@@ -247,7 +247,6 @@ export default {
         });
     },
     deleteAppointment(id) {
-      this.$Progress.start();
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -257,26 +256,26 @@ export default {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
       }).then(result => {
-        this.form
-          .delete("api/appointment/" + id)
-          .then(() => {
-            if (result.value) {
-              Swal.fire(
-                "Deleted!",
-                "Your appointment has been deleted.",
-                "success"
+        if (result.value) {
+          this.form
+            .delete("api/appointment/" + id)
+            .then(() => {
+              // Swal.fire(
+              //   "Deleted!",
+              //   "Your appointment has been deleted.",
+              //   "success"
+              // );
+              this.$toast.success("Appointment Deleted succesfully");
+            })
+            .catch(() => {
+              this.$toast.error(
+                "Oops, something went wrong, fail to delete appoimtments"
               );
-              this.$Progress.finish();
-              Fire.$emit("AfterDeleted");
-            } else {
-              result.dismiss === Swal.DismissReason.cancel;
-            }
-          })
-          .catch(() => {
-            this.$toast.error(
-              "Oops, something went wrong, fail to delete appoimtments"
-            );
-          });
+            });
+
+          this.$Progress.finish();
+          Fire.$emit("AfterDeleted");
+        }
       });
     }
   },
