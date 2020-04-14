@@ -70,6 +70,10 @@ const routes = [
         path: '/admin_dashboard',
         component: require('./views/AdminDashboard').default
     },
+    {
+        path: '*',
+        component: require('./views/Dashboard').default
+    },
 ]
 
 

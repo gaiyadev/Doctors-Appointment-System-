@@ -57,6 +57,7 @@ Vue.use(VueNotification, {
     }
 });
 
+
 Vue.filter('uppercase', function (text) {
     return text.toUpperCase();
 });

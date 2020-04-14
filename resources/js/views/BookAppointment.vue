@@ -36,15 +36,15 @@
                       <td>{{ appointment.purpose | uppercase }}</td>
                       <td>{{ appointment.created_at | date }}</td>
                       <td class="text-primary">
+                        <button @click="editModal(appointment)" type="button" class="btn btn-info">
+                          <span class="material-icons">create</span>
+                        </button>
                         <button
                           @click="deleteAppointment(appointment.id)"
                           type="button"
                           class="btn btn-danger"
                         >
                           <span class="material-icons">remove_circle</span>
-                        </button>
-                        <button @click="editModal(appointment)" type="button" class="btn btn-info">
-                          <span class="material-icons">create</span>
                         </button>
                       </td>
                     </tr>
@@ -71,9 +71,10 @@
           <div class="modal-header"></div>
           <div class="modal-body">
             <div class="card card-nav-tabs">
-              <div class="card-header card-header-primary">Book Appointment</div>
+              <div v-show="editMode" class="card-header card-header-primary">Update Appointment</div>
+              <div v-show="!editMode" class="card-header card-header-primary">Book Appointment</div>
               <div class="card-body">
-                <form @submit.prevent="createAppointment">
+                <form @submit.prevent=" editMode ? updateAppointment()  : createAppointment () ">
                   <div class="form-group">
                     <label for="email" class="text-primary">Email Address</label>
                     <input
@@ -142,7 +143,18 @@
                     ></textarea>
                     <has-error :form="form" field="purpose"></has-error>
                   </div>
-                  <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">BOOK</button>
+                  <button
+                    v-show="editMode"
+                    type="submit"
+                    name="submit"
+                    class="btn btn-primary btn-lg btn-block"
+                  >UPDATE</button>
+                  <button
+                    v-show="!editMode"
+                    type="submit"
+                    name="submit"
+                    class="btn btn-primary btn-lg btn-block"
+                  >BOOK</button>
                 </form>
               </div>
             </div>
@@ -162,7 +174,7 @@
 export default {
   data() {
     return {
-      //editMode: false,
+      editMode: false,
       appointments: {},
       form: new Form({
         id: "",
@@ -183,18 +195,21 @@ export default {
         .then(() => {
           this.$Progress.finish();
           this.$toast.success("Appointment updated succesfully");
-          // Fire.$emit("AfterUpdated");
+          $("#bookModal").modal("hide");
+          Fire.$emit("AfterUpdated");
         })
         .catch(() => {
           this.$Progress.fail();
+          this.$toast.error("Oops, please field the form again");
         });
     },
     //edit modal
     editModal(appointment) {
-      // this.editMode = true;
+      this.editMode = true;
       this.form.reset();
       $("#bookModal").modal("show");
-      //this.form.fill(post);
+      this.form.fill(appointment);
+      console.log("click");
     },
     // add modal
     newModal() {
@@ -209,13 +224,15 @@ export default {
         .then(() => {
           this.$Progress.finish;
           this.$toast.success("Appointment booked succesfully");
+          $("#bookModal").modal("hide");
+          this.form.reset();
         })
         .catch(() => {
           this.$Progress.fail;
           this.$toast.error("Oops, please field the form again");
         });
-      this.form.reset();
-      $("#bookModal").modal("hide");
+      // this.form.reset();
+
       // Fire.$emit("AfterCreated");
     },
     loadAppointment() {
@@ -234,13 +251,12 @@ export default {
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: "warning",
+        type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
       }).then(result => {
-        //send ajax delete request
         this.form
           .delete("api/appointment/" + id)
           .then(() => {
@@ -252,6 +268,8 @@ export default {
               );
               this.$Progress.finish();
               Fire.$emit("AfterDeleted");
+            } else {
+              result.dismiss === Swal.DismissReason.cancel;
             }
           })
           .catch(() => {
@@ -276,9 +294,9 @@ export default {
     Fire.$on("AfterDeleted", () => {
       this.loadAppointment();
     });
-    // Fire.$on("AfterUpdated", () => {
-    //   this.loadAppointment();
-    // });
+    Fire.$on("AfterUpdated", () => {
+      this.loadAppointment();
+    });
   }
 };
 </script>

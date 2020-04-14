@@ -5713,10 +5713,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      //editMode: false,
+      editMode: false,
       appointments: {},
       form: new Form({
         id: "",
@@ -5736,22 +5743,29 @@ __webpack_require__.r(__webpack_exports__);
       this.form.put("api/appointment/" + this.form.id).then(function () {
         _this.$Progress.finish();
 
+        _this.$toast.success("Appointment updated succesfully");
+
+        $("#bookModal").modal("hide");
         Fire.$emit("AfterUpdated");
       })["catch"](function () {
         _this.$Progress.fail();
+
+        _this.$toast.error("Oops, please field the form again");
       });
     },
-    editModal: function editModal(post) {
+    //edit modal
+    editModal: function editModal(appointment) {
       this.editMode = true;
       this.form.reset();
-      $("#exampleModal").modal("show");
-      this.form.fill(post);
+      $("#bookModal").modal("show");
+      this.form.fill(appointment);
+      console.log("click");
     },
     // add modal
     newModal: function newModal() {
       this.editMode = false;
       this.form.reset();
-      $("#exampleModal").modal("show");
+      $("#bookModal").modal("show");
     },
     createAppointment: function createAppointment() {
       var _this2 = this;
@@ -5761,13 +5775,16 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$Progress.finish;
 
         _this2.$toast.success("Appointment booked succesfully");
+
+        $("#bookModal").modal("hide");
+
+        _this2.form.reset();
       })["catch"](function () {
         _this2.$Progress.fail;
 
         _this2.$toast.error("Oops, please field the form again");
-      });
-      this.form.reset();
-      $("#bookModal").modal("hide"); // Fire.$emit("AfterCreated");
+      }); // this.form.reset();
+      // Fire.$emit("AfterCreated");
     },
     loadAppointment: function loadAppointment() {
       var _this3 = this;
@@ -5788,13 +5805,12 @@ __webpack_require__.r(__webpack_exports__);
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: "warning",
+        type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
-        //send ajax delete request
         _this4.form["delete"]("api/appointment/" + id).then(function () {
           if (result.value) {
             Swal.fire("Deleted!", "Your appointment has been deleted.", "success");
@@ -5802,6 +5818,8 @@ __webpack_require__.r(__webpack_exports__);
             _this4.$Progress.finish();
 
             Fire.$emit("AfterDeleted");
+          } else {
+            result.dismiss === Swal.DismissReason.cancel;
           }
         })["catch"](function () {
           _this4.$toast.error("Oops, something went wrong, fail to delete appoimtments");
@@ -5822,9 +5840,10 @@ __webpack_require__.r(__webpack_exports__);
     }, 500);
     Fire.$on("AfterDeleted", function () {
       _this5.loadAppointment();
-    }); // Fire.$on("AfterUpdated", () => {
-    //   this.loadAppointment();
-    // });
+    });
+    Fire.$on("AfterUpdated", function () {
+      _this5.loadAppointment();
+    });
   }
 });
 
@@ -66285,10 +66304,22 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "table-responsive" }, [
-                _vm._m(1),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.newModal }
+                  },
+                  [
+                    _c("span", { staticClass: "material-icons" }, [
+                      _vm._v("add_circle")
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _c("table", { staticClass: "table" }, [
-                  _vm._m(2),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -66324,6 +66355,24 @@ var render = function() {
                           _c(
                             "button",
                             {
+                              staticClass: "btn btn-info",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.editModal(appointment)
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { staticClass: "material-icons" }, [
+                                _vm._v("create")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
                               staticClass: "btn btn-danger",
                               attrs: { type: "button" },
                               on: {
@@ -66337,9 +66386,7 @@ var render = function() {
                                 _vm._v("remove_circle")
                               ])
                             ]
-                          ),
-                          _vm._v(" "),
-                          _vm._m(3, true)
+                          )
                         ])
                       ])
                     }),
@@ -66377,7 +66424,33 @@ var render = function() {
                 _c("div", { staticClass: "card card-nav-tabs" }, [
                   _c(
                     "div",
-                    { staticClass: "card-header card-header-primary" },
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.editMode,
+                          expression: "editMode"
+                        }
+                      ],
+                      staticClass: "card-header card-header-primary"
+                    },
+                    [_vm._v("Update Appointment")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.editMode,
+                          expression: "!editMode"
+                        }
+                      ],
+                      staticClass: "card-header card-header-primary"
+                    },
                     [_vm._v("Book Appointment")]
                   ),
                   _vm._v(" "),
@@ -66388,7 +66461,9 @@ var render = function() {
                         on: {
                           submit: function($event) {
                             $event.preventDefault()
-                            return _vm.createAppointment($event)
+                            _vm.editMode
+                              ? _vm.updateAppointment()
+                              : _vm.createAppointment()
                           }
                         }
                       },
@@ -66674,6 +66749,31 @@ var render = function() {
                         _c(
                           "button",
                           {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.editMode,
+                                expression: "editMode"
+                              }
+                            ],
+                            staticClass: "btn btn-primary btn-lg btn-block",
+                            attrs: { type: "submit", name: "submit" }
+                          },
+                          [_vm._v("UPDATE")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.editMode,
+                                expression: "!editMode"
+                              }
+                            ],
                             staticClass: "btn btn-primary btn-lg btn-block",
                             attrs: { type: "submit", name: "submit" }
                           },
@@ -66685,7 +66785,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(4)
+              _vm._m(2)
             ])
           ]
         )
@@ -66712,23 +66812,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        attrs: {
-          type: "button",
-          "data-toggle": "modal",
-          "data-target": "#bookModal"
-        }
-      },
-      [_c("span", { staticClass: "material-icons" }, [_vm._v("add_circle")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "text-primary" }, [
       _c("th", [_vm._v("ID")]),
       _vm._v(" "),
@@ -66746,16 +66829,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Actions")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-info", attrs: { type: "button" } },
-      [_c("span", { staticClass: "material-icons" }, [_vm._v("create")])]
-    )
   },
   function() {
     var _vm = this
@@ -84746,6 +84819,9 @@ var routes = [{
 }, {
   path: '/admin_dashboard',
   component: __webpack_require__(/*! ./views/AdminDashboard */ "./resources/js/views/AdminDashboard.vue")["default"]
+}, {
+  path: '*',
+  component: __webpack_require__(/*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue")["default"]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
