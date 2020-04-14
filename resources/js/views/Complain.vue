@@ -134,7 +134,7 @@ export default {
         });
       // this.form.reset();
 
-      // Fire.$emit("AfterCreated");
+      Fire.$emit("AfterCreated");
     },
 
     loadComplain() {
@@ -177,10 +177,14 @@ export default {
       });
     }
   },
+
   mounted() {
     this.loadComplain();
     Fire.$on("AfterCreated", () => {
       this.loadComplain(); //to listen to component before updating
+    });
+    Fire.$on("AfterDeleted", () => {
+      this.loadComplain();
     });
   }
 };

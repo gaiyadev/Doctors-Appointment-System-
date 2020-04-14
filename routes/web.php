@@ -52,6 +52,10 @@ Route::delete('api/complain/{id}', 'ComplainController@destroy');
 
 
 
+Route::post('api/change', 'UserChangePasswordController@changePassword');
+
+
+
 Route::get('/{any}', 'HomeController@index')->where('path', ' ([A-z\d-\/_.]+)?');
 
 
