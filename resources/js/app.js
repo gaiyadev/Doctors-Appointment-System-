@@ -57,6 +57,11 @@ Vue.use(VueNotification, {
     }
 });
 
+import 'fullcalendar/dist/fullcalendar.css'
+import FullCalendar from 'vue-full-calendar'
+Vue.use(FullCalendar)
+
+
 
 Vue.filter('uppercase', function (text) {
     return text.toUpperCase();
