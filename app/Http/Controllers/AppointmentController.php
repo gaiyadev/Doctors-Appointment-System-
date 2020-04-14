@@ -14,6 +14,11 @@ class AppointmentController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function index() {
+        return Appointment::orderBy('id', 'asc')->paginate(4);
+    }
+
      // Saving to database
     public function store(Request $request) {
          $request->validate([
@@ -35,6 +40,44 @@ class AppointmentController extends Controller
        $Appointment->save();
 
         return ['message' => 'Post updated'];
+
+    }
+
+
+    //updating
+    public function update(Request $request, $id)
+    {
+         $request->validate([
+             'email' => 'required|min:3|max:50',            
+            'doctor' => 'required|max:255',
+            'date' => 'required',
+            'time' => 'required',
+            'purpose' => 'required|min:3|max:255',
+            ]);
+
+         //update post
+       $Appointment =  Appointment::find($id);
+       $Appointment->email = $request->input('email');
+       $Appointment->doctor = $request->input('doctor');
+       $Appointment->date = $request->input('date');
+       $Appointment->time = $request->input('time');
+       $Appointment->purpose = $request->input('purpose');
+       $Appointment->user_id = auth()->user()->id;
+       $Appointment->save();
+
+
+        return ['message' => 'Post updated'];
+    }
+
+
+
+
+
+      public function destroy($id)
+    {
+        $Appointment =  Appointment::find($id);
+        $Appointment->delete();
+        return ['message' => 'Post Deleted'];
 
     }
 }

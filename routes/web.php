@@ -41,6 +41,9 @@ Route::get('admin-password/reset/{token}', 'Admin\ResetPasswordController@showRe
 
 //api calls for appointment
 Route::post('api/appointment', 'AppointmentController@store');
+Route::get('api/appointment', 'AppointmentController@index');
+Route::delete('api/appointment/{id}', 'AppointmentController@destroy');
+Route::put('api/appointment/{id}', 'AppointmentController@update');
 
 
 

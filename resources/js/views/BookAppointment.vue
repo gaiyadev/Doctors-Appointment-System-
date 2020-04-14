@@ -12,37 +12,38 @@
               <div class="table-responsive">
                 <!-- Button trigger modal -->
 
-                <button
-                  type="button"
-                  data-toggle="modal"
-                  data-target="#bookModal"
-                  class="btn btn-primary"
-                >
+                <button type="button" @click="newModal" class="btn btn-primary">
                   <span class="material-icons">add_circle</span>
                 </button>
                 <table class="table">
                   <thead class="text-primary">
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>State</th>
-                    <th>City</th>
+                    <th>Email</th>
                     <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Purpose</th>
                     <th>Booked_at</th>
                     <th>Actions</th>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td class="text-primary">$36,738</td>
-                      <td class="text-primary">$36,738</td>
+                    <tr v-for="appointment in appointments" :key="appointment.id">
+                      <td>{{ appointment.id }}</td>
+                      <td>{{ appointment.email }}</td>
+                      <td>{{ appointment.doctor | uppercase }}</td>
+                      <td>{{ appointment.date | date }}</td>
+                      <td>{{ appointment.time }}</td>
+                      <td>{{ appointment.purpose | uppercase }}</td>
+                      <td>{{ appointment.created_at | date }}</td>
                       <td class="text-primary">
-                        <button type="button" class="btn btn-danger">
+                        <button
+                          @click="deleteAppointment(appointment.id)"
+                          type="button"
+                          class="btn btn-danger"
+                        >
                           <span class="material-icons">remove_circle</span>
                         </button>
-                        <button type="button" class="btn btn-info">
+                        <button @click="editModal(appointment)" type="button" class="btn btn-info">
                           <span class="material-icons">create</span>
                         </button>
                       </td>
@@ -162,7 +163,7 @@ export default {
   data() {
     return {
       //editMode: false,
-      appointment: {},
+      appointments: {},
       form: new Form({
         id: "",
         email: "",
@@ -175,30 +176,32 @@ export default {
   },
 
   methods: {
-    // updateAppointment() {
-    //   this.$Progress.start();
-    //   this.form
-    //     .put("api/appointment/" + this.form.id)
-    //     .then(() => {
-    //       this.$Progress.finish();
-    //       Fire.$emit("AfterUpdated");
-    //     })
-    //     .catch(() => {
-    //       this.$Progress.fail();
-    //     });
-    // },
-    // editModal(post) {
-    //   this.editMode = true;
-    //   this.form.reset();
-    //   $("#exampleModal").modal("show");
-    //   this.form.fill(post);
-    // },
-    //add modal
-    // newModal() {
-    //   this.editMode = false;
-    //   this.form.reset();
-    //   $("#exampleModal").modal("show");
-    // },
+    updateAppointment() {
+      this.$Progress.start();
+      this.form
+        .put("api/appointment/" + this.form.id)
+        .then(() => {
+          this.$Progress.finish();
+          this.$toast.success("Appointment updated succesfully");
+          // Fire.$emit("AfterUpdated");
+        })
+        .catch(() => {
+          this.$Progress.fail();
+        });
+    },
+    //edit modal
+    editModal(appointment) {
+      // this.editMode = true;
+      this.form.reset();
+      $("#bookModal").modal("show");
+      //this.form.fill(post);
+    },
+    // add modal
+    newModal() {
+      this.editMode = false;
+      this.form.reset();
+      $("#bookModal").modal("show");
+    },
     createAppointment() {
       this.$Progress.start();
       this.form
@@ -214,54 +217,68 @@ export default {
       this.form.reset();
       $("#bookModal").modal("hide");
       // Fire.$emit("AfterCreated");
+    },
+    loadAppointment() {
+      axios
+        .get("api/appointment")
+        .then(({ data }) => (this.appointments = data.data))
+        .catch(() => {
+          this.$Progress.fail();
+          this.$toast.error(
+            "Oops, something went wrong, fail to load appoimtments"
+          );
+        });
+    },
+    deleteAppointment(id) {
+      this.$Progress.start();
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        //send ajax delete request
+        this.form
+          .delete("api/appointment/" + id)
+          .then(() => {
+            if (result.value) {
+              Swal.fire(
+                "Deleted!",
+                "Your appointment has been deleted.",
+                "success"
+              );
+              this.$Progress.finish();
+              Fire.$emit("AfterDeleted");
+            }
+          })
+          .catch(() => {
+            this.$toast.error(
+              "Oops, something went wrong, fail to delete appoimtments"
+            );
+          });
+      });
     }
-    // loadAppointment() {
-    //   axios
-    //     .get("api/appointment")
-    //     .then(({ data }) => (this.posts = data))
-    //     .catch(() => {
-    //       this.$Progress.fail();
-    //     });
-    // },
-    // deleteAppointment(id) {
-    //   this.$Progress.start();
-    //   Swal.fire({
-    //     title: "Are you sure?",
-    //     text: "You won't be able to revert this!",
-    //     icon: "warning",
-    //     showCancelButton: true,
-    //     confirmButtonColor: "#3085d6",
-    //     cancelButtonColor: "#d33",
-    //     confirmButtonText: "Yes, delete it!"
-    //   }).then(result => {
-    //     //send ajax delete request
-    //     this.form
-    //       .delete("api/appointment/" + id)
-    //       .then(() => {
-    //         if (result.value) {
-    //           Swal.fire("Deleted!", "Your file has been deleted.", "success");
-    //           this.$Progress.finish();
-    //           Fire.$emit("AfterDeleted");
-    //         }
-    //       })
-    //       .catch(() => {
-    //         //Swal.fire("failed!", "Someting went wrong.", "warning");
-    //       });
-    //   });
-    // }
-  }
+  },
 
-  // mounted() {
-  //   this.loadAppointment();
-  //   Fire.$on("AfterCreated", () => {
-  //     this.loadAppointment();
-  //   });
-  //   Fire.$on("AfterDeleted", () => {
-  //     this.loadAppointment();
-  //   });
-  //   Fire.$on("AfterUpdated", () => {
-  //     this.loadAppointment();
-  //   });
-  // }
+  mounted() {
+    this.loadAppointment();
+    // Fire.$on("AfterCreated", () => {
+    //   this.loadAppointment(); to listen to component before updating
+    // });
+    //send request to the server every 5sec
+    setInterval(() => {
+      this.loadAppointment();
+    }, 500);
+
+    Fire.$on("AfterDeleted", () => {
+      this.loadAppointment();
+    });
+    // Fire.$on("AfterUpdated", () => {
+    //   this.loadAppointment();
+    // });
+  }
 };
 </script>

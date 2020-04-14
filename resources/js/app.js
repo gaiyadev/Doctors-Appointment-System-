@@ -1,4 +1,4 @@
-//require('./bootstrap');
+require('./bootstrap');
 import Vue from 'vue';
 import router from './router';
 import Toast from "vue-toastification";
@@ -7,12 +7,13 @@ import "vue-toastification/dist/index.css";
 import { Form, HasError, AlertError, AlertSuccess } from 'vform';
 import VueProgressBar from 'vue-progressbar'
 import VueNotification from "@kugatsu/vuenotification";
+import moment from 'moment';
 
 window.Vue = require('vue');
 //router
 Vue.use(VueRouter);
 
-//window.Vue = require('vue');
+window.Vue = require('vue');
 
 const options = {
     // You can set your default options here
@@ -56,7 +57,13 @@ Vue.use(VueNotification, {
     }
 });
 
+Vue.filter('uppercase', function (text) {
+    return text.toUpperCase();
+});
 
+Vue.filter('date', function name(created) {
+    return moment(created).format('MMMM DD YYYY');
+});
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
