@@ -13,15 +13,15 @@
               <div class="form-group">
                 <input
                   class="form-control"
-                  name="firstname"
-                  :class="{ 'is-invalid': form.errors.has('firstname') }"
+                  name="name"
+                  :class="{ 'is-invalid': form.errors.has('name') }"
                   id="input-name"
-                  v-model="form.firstname"
+                  v-model="form.name"
                   type="text"
                   placeholder="FirstName"
                   aria-required="true"
                 />
-                <has-error :form="form" field="firstname"></has-error>
+                <has-error :form="form" field="name"></has-error>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@ export default {
       users: {},
       form: new Form({
         id: "",
-        firstname: "",
+        name: "",
         lastname: "",
         dob: "",
         email: ""
@@ -102,20 +102,21 @@ export default {
     };
   },
   methods: {
-    loadProfile(id) {
+    loadProfile() {
       this.$Progress.start();
       axios
-        .get("api/user" + id)
+        .get("api/user")
         .then(({ data }) => this.form.fill(data))
         .catch(() => {
           this.$Progress.fail();
           this.$toast.error("Oops, something went wrong, fail to load profile");
         });
     },
-    updateUser() {
+    //...
+    updateUser(id) {
       this.$Progress.start();
       this.form
-        .put("api/user")
+        .put("api/user" + id)
         .then(() => {
           this.$Progress.finish;
           this.$toast.success("Profile booked succesfully");

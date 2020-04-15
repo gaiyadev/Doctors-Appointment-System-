@@ -6570,7 +6570,7 @@ __webpack_require__.r(__webpack_exports__);
       users: {},
       form: new Form({
         id: "",
-        firstname: "",
+        name: "",
         lastname: "",
         dob: "",
         email: ""
@@ -86025,32 +86025,32 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.firstname,
-                          expression: "form.firstname"
+                          value: _vm.form.name,
+                          expression: "form.name"
                         }
                       ],
                       staticClass: "form-control",
-                      class: { "is-invalid": _vm.form.errors.has("firstname") },
+                      class: { "is-invalid": _vm.form.errors.has("name") },
                       attrs: {
-                        name: "firstname",
+                        name: "name",
                         id: "input-name",
                         type: "text",
                         placeholder: "FirstName",
                         "aria-required": "true"
                       },
-                      domProps: { value: _vm.form.firstname },
+                      domProps: { value: _vm.form.name },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "firstname", $event.target.value)
+                          _vm.$set(_vm.form, "name", $event.target.value)
                         }
                       }
                     }),
                     _vm._v(" "),
                     _c("has-error", {
-                      attrs: { form: _vm.form, field: "firstname" }
+                      attrs: { form: _vm.form, field: "name" }
                     })
                   ],
                   1
