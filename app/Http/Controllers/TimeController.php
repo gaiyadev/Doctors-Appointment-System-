@@ -7,6 +7,7 @@ use App\TIME;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use App\Admin;
+use App\Doctor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,6 +26,7 @@ class TimeController extends Controller
         $user = Auth::user()->id;
         return TIME::where('user_id', $user)->orderBy('id', 'asc')->paginate(4);
     }
+    
 
     //
      // Saving to database

@@ -14,20 +14,20 @@
                   <th>ID</th>
                   <th>FirstName</th>
                   <th>LastName</th>
-                  <th>Email</th>
                   <th>State</th>
                   <th>Specailizastion</th>
+                  <th>Date</th>
                   <th>Time</th>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Dakota Rice</td>
-                    <td>Niger</td>
-                    <td>Oud-Turnhout</td>
-                    <td class="text-primary">$36,738</td>
-                    <td class="text-primary">$36,738</td>
-                    <td class="text-primary">$36,738</td>
+                  <tr v-for="list in lists" :key="list.id">
+                    <td>{{ list.id }}</td>
+                    <td>FirstName</td>
+                    <td>LastName</td>
+                    <td class>state</td>
+                    <td>Specailizastion</td>
+                    <td>{{ list.date | date}}</td>
+                    <td>{{ list.time }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -42,23 +42,31 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      lists: {},
+      form: new Form({
+        id: "",
+        date: "",
+        time: ""
+      })
+    };
   },
   methods: {
-    getDoctors() {
-      this.$Progress.start();
+    getActiveDoctors() {
       axios
-        .get("api/userEmail")
-        .then(({ data }) => this.form.fill(data))
+        .get("api/getactive")
+        .then(({ data }) => (this.lists = data))
         .catch(() => {
           this.$Progress.fail();
-          this.$toast.error("Oops, something went wrong, fail to load profile");
+          // this.$toast.error(
+          //   "Oops, something went wrong, fail to load appoimtments"
+          // );
         });
     }
   },
 
   mounted() {
-    this.getDoctors();
+    this.getActiveDoctors();
     console.log("Component mounted.");
   }
 };

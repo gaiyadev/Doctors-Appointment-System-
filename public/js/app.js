@@ -5702,7 +5702,7 @@ __webpack_require__.r(__webpack_exports__);
 
     setInterval(function () {
       _this5.loadDoctor();
-    }, 1000);
+    }, 3000);
     Fire.$on("AfterDeleted", function () {
       _this5.loadDoctor();
     });
@@ -5973,7 +5973,7 @@ __webpack_require__.r(__webpack_exports__);
 
     setInterval(function () {
       _this5.loadAppointment();
-    }, 1000);
+    }, 6000);
     Fire.$on("AfterDeleted", function () {
       _this5.loadAppointment();
     });
@@ -6969,25 +6969,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      lists: {},
+      form: new Form({
+        id: "",
+        date: "",
+        time: ""
+      })
+    };
   },
   methods: {
-    getDoctors: function getDoctors() {
+    getActiveDoctors: function getActiveDoctors() {
       var _this = this;
 
-      this.$Progress.start();
-      axios.get("api/userEmail").then(function (_ref) {
+      axios.get("api/getactive").then(function (_ref) {
         var data = _ref.data;
-        return _this.form.fill(data);
+        return _this.lists = data;
       })["catch"](function () {
-        _this.$Progress.fail();
+        _this.$Progress.fail(); // this.$toast.error(
+        //   "Oops, something went wrong, fail to load appoimtments"
+        // );
 
-        _this.$toast.error("Oops, something went wrong, fail to load profile");
       });
     }
   },
   mounted: function mounted() {
-    this.getDoctors();
+    this.getActiveDoctors();
     console.log("Component mounted.");
   }
 });
@@ -87053,75 +87060,79 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.lists, function(list) {
+                    return _c("tr", { key: list.id }, [
+                      _c("td", [_vm._v(_vm._s(list.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("FirstName")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("LastName")]),
+                      _vm._v(" "),
+                      _c("td", {}, [_vm._v("state")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Specailizastion")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm._f("date")(list.date)))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(list.time))])
+                    ])
+                  }),
+                  0
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header card-header-primary" }, [
-              _c("h4", { staticClass: "card-title text-uppercase" }, [
-                _vm._v("Doctors Available")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-category" }, [
-                _vm._v("Here is a list of Doctors on seat")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "table-responsive" }, [
-                _c("table", { staticClass: "table" }, [
-                  _c("thead", { staticClass: "text-primary" }, [
-                    _c("th", [_vm._v("ID")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("FirstName")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("LastName")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Email")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("State")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Specailizastion")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Time")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("td", [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Dakota Rice")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Niger")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Oud-Turnhout")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
+    return _c("div", { staticClass: "card-header card-header-primary" }, [
+      _c("h4", { staticClass: "card-title text-uppercase" }, [
+        _vm._v("Doctors Available")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-category" }, [
+        _vm._v("Here is a list of Doctors on seat")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "text-primary" }, [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("FirstName")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("LastName")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("State")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Specailizastion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Time")])
     ])
   }
 ]

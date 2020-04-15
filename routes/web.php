@@ -59,6 +59,10 @@ Route::get('api/time', 'TimeController@index');
 Route::delete('api/time/{id}', 'TimeController@destroy');
 Route::put('api/time/{id}', 'TimeController@update');
 
+//doctor on set
+Route::get('api/getactive', 'AdminController@seat');
+
+
 
 //fetch from user table
 Route::get('api/user/all', 'AdminController@allAppointment');

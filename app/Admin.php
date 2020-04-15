@@ -9,7 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\User;
+use App\Admin;
 
 class Admin extends Authenticatable
 {
@@ -57,6 +58,11 @@ class Admin extends Authenticatable
 
     public function setPasswordAttribute($value) {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    //relationship method naming must be single
+    public function Appointment() {
+        return $this->hasMany('App\TIME');
     }
 
 }

@@ -324,7 +324,7 @@ export default {
     //send request to the server every 5sec
     setInterval(() => {
       this.loadDoctor();
-    }, 1000);
+    }, 3000);
 
     Fire.$on("AfterDeleted", () => {
       this.loadDoctor();

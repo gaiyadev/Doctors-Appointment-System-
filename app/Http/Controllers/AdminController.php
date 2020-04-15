@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use\App\Admin;
 use\App\User;
+use\App\TIME;
 use\App\Appointment;
 use\App\complain;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -40,6 +41,10 @@ class AdminController extends Controller
 //... fetch all appt
     public function allAppointment() {
         return Appointment::all();
+    }
+
+     public function seat() {
+        return TiME::all();
     }
     
     // public function index() {
