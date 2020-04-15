@@ -45,6 +45,9 @@ Route::get('api/appointment', 'AppointmentController@index');
 Route::delete('api/appointment/{id}', 'AppointmentController@destroy');
 Route::put('api/appointment/{id}', 'AppointmentController@update');
 
+//..get use email
+Route::get('api/userEmail', 'AppointmentController@getEmail');
+
 //complain
 Route::post('api/complain', 'ComplainController@store');
 Route::get('api/complain', 'ComplainController@index');
@@ -56,6 +59,8 @@ Route::post('api/change', 'UserChangePasswordController@changePassword');
 //update user4 info
 Route::get('api/profile', 'UserUpdateProfileController@show');
 Route::put('api/user/{id}', 'UserUpdateProfileController@updateInfo');
+
+
 
 
 

@@ -5834,23 +5834,10 @@ __webpack_require__.r(__webpack_exports__);
           Fire.$emit("AfterDeleted");
         }
       });
-    },
-    getUser: function getUser() {
-      var _this5 = this;
-
-      this.$Progress.start();
-      axios.get("api/profile").then(function (_ref2) {
-        var data = _ref2.data;
-        return _this5.form.fill(data);
-      })["catch"](function () {
-        _this5.$Progress.fail();
-
-        _this5.$toast.error("Oops, something went wrong, fail to load profile");
-      });
     }
   },
   mounted: function mounted() {
-    var _this6 = this;
+    var _this5 = this;
 
     this.loadAppointment(); // Fire.$on("AfterCreated", () => {
     //   this.loadAppointment(); to listen to component before updating
@@ -5858,13 +5845,13 @@ __webpack_require__.r(__webpack_exports__);
     //send request to the server every 5sec
 
     setInterval(function () {
-      _this6.loadAppointment();
+      _this5.loadAppointment();
     }, 1000);
     Fire.$on("AfterDeleted", function () {
-      _this6.loadAppointment();
+      _this5.loadAppointment();
     });
     Fire.$on("AfterUpdated", function () {
-      _this6.loadAppointment();
+      _this5.loadAppointment();
     });
   }
 });
@@ -6229,7 +6216,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  methods: {
+    getDoctors: function getDoctors() {
+      var _this = this;
+
+      this.$Progress.start();
+      axios.get("api/userEmail").then(function (_ref) {
+        var data = _ref.data;
+        return _this.form.fill(data);
+      })["catch"](function () {
+        _this.$Progress.fail();
+
+        _this.$toast.error("Oops, something went wrong, fail to load profile");
+      });
+    }
+  },
   mounted: function mounted() {
+    this.getDoctors();
     console.log("Component mounted.");
   }
 });

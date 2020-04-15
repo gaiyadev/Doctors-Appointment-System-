@@ -282,17 +282,6 @@ export default {
           Fire.$emit("AfterDeleted");
         }
       });
-    },
-
-    getUser() {
-      this.$Progress.start();
-      axios
-        .get("api/profile")
-        .then(({ data }) => this.form.fill(data))
-        .catch(() => {
-          this.$Progress.fail();
-          this.$toast.error("Oops, something went wrong, fail to load profile");
-        });
     }
   },
 

@@ -41,7 +41,24 @@
 
 <script>
 export default {
+  data() {
+    return {};
+  },
+  methods: {
+    getDoctors() {
+      this.$Progress.start();
+      axios
+        .get("api/userEmail")
+        .then(({ data }) => this.form.fill(data))
+        .catch(() => {
+          this.$Progress.fail();
+          this.$toast.error("Oops, something went wrong, fail to load profile");
+        });
+    }
+  },
+
   mounted() {
+    this.getDoctors();
     console.log("Component mounted.");
   }
 };
