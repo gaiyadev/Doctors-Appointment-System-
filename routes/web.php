@@ -54,7 +54,10 @@ Route::get('api/complainlist', 'AdminController@complain');
 Route::get('api/admin', 'AdminUpdateProfileController@show');
 Route::put('api/admin/{id}', 'AdminUpdateProfileController@updateInfo');
 Route::put('api/adminPassword/', 'AdminChangePasswordCOntroller@changePassword');
-Route::post('api/time/', 'AdminChangePasswordCOntroller@changePassword');
+Route::post('api/time/', 'TimeController@store');
+Route::get('api/time', 'TimeController@index');
+Route::delete('api/time/{id}', 'TimeController@destroy');
+Route::put('api/time/{id}', 'TimeController@update');
 
 
 //fetch from user table

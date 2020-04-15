@@ -5866,7 +5866,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      this.form.put("api/appointment/" + this.form.id).then(function () {
+      this.form.put("api/time/" + this.form.id).then(function () {
         _this.$Progress.finish();
 
         _this.$toast.success("Appointment updated succesfully");
@@ -5897,7 +5897,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$Progress.start();
-      this.form.post("api/appointment").then(function () {
+      this.form.post("api/time").then(function () {
         _this2.$Progress.finish;
 
         _this2.$toast.success("Appointment booked succesfully");
@@ -5915,7 +5915,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAppointment: function loadAppointment() {
       var _this3 = this;
 
-      axios.get("api/appointment").then(function (_ref) {
+      axios.get("api/time").then(function (_ref) {
         var data = _ref.data;
         return _this3.appointments = data.data;
       })["catch"](function () {
@@ -5940,7 +5940,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this4.$Progress.start();
 
-          _this4.form["delete"]("api/appointment/" + id).then(function () {
+          _this4.form["delete"]("api/time/" + id).then(function () {
             // Swal.fire(
             //   "Deleted!",
             //   "Your appointment has been deleted.",

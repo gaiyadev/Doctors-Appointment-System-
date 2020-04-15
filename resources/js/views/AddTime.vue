@@ -143,7 +143,7 @@ export default {
     updateAppointment() {
       this.$Progress.start();
       this.form
-        .put("api/appointment/" + this.form.id)
+        .put("api/time/" + this.form.id)
         .then(() => {
           this.$Progress.finish();
           this.$toast.success("Appointment updated succesfully");
@@ -172,7 +172,7 @@ export default {
     createAppointment() {
       this.$Progress.start();
       this.form
-        .post("api/appointment")
+        .post("api/time")
         .then(() => {
           this.$Progress.finish;
           this.$toast.success("Appointment booked succesfully");
@@ -189,7 +189,7 @@ export default {
     },
     loadAppointment() {
       axios
-        .get("api/appointment")
+        .get("api/time")
         .then(({ data }) => (this.appointments = data.data))
         .catch(() => {
           this.$Progress.fail();
@@ -211,7 +211,7 @@ export default {
         if (result.value) {
           this.$Progress.start();
           this.form
-            .delete("api/appointment/" + id)
+            .delete("api/time/" + id)
             .then(() => {
               // Swal.fire(
               //   "Deleted!",

@@ -73,9 +73,9 @@ class AppointmentController extends Controller
     }
 
 
-        public function getEmail () {
-                    return  Auth::user()->email;
-        }
+        // public function getEmail () {
+        //             return  Auth::user()->email;
+        // }
 
 
       public function destroy($id)
