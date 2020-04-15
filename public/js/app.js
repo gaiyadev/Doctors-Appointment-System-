@@ -5704,7 +5704,7 @@ __webpack_require__.r(__webpack_exports__);
       _this5.loadDoctor();
     }, 1000);
     Fire.$on("AfterDeleted", function () {
-      _this5.loadDoctort();
+      _this5.loadDoctor();
     });
     Fire.$on("AfterUpdated", function () {// this.loadDoctor();
     });
@@ -5849,11 +5849,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editMode: false,
-      appointments: {},
+      times: {},
       form: new Form({
         id: "",
         date: "",
@@ -5869,7 +5872,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.put("api/time/" + this.form.id).then(function () {
         _this.$Progress.finish();
 
-        _this.$toast.success("Appointment updated succesfully");
+        _this.$toast.success("Time updated succesfully");
 
         $("#bookModal").modal("hide");
         Fire.$emit("AfterUpdated");
@@ -5880,11 +5883,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     //edit modal
-    editModal: function editModal(appointment) {
+    editModal: function editModal(time) {
       this.editMode = true;
       this.form.reset();
       $("#bookModal").modal("show");
-      this.form.fill(appointment);
+      this.form.fill(time);
       console.log("click");
     },
     // add modal
@@ -5900,7 +5903,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.post("api/time").then(function () {
         _this2.$Progress.finish;
 
-        _this2.$toast.success("Appointment booked succesfully");
+        _this2.$toast.success("Time booked succesfully");
 
         $("#bookModal").modal("hide");
 
@@ -5917,7 +5920,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("api/time").then(function (_ref) {
         var data = _ref.data;
-        return _this3.appointments = data.data;
+        return _this3.times = data.data;
       })["catch"](function () {
         _this3.$Progress.fail(); // this.$toast.error(
         //   "Oops, something went wrong, fail to load appoimtments"
@@ -5946,7 +5949,7 @@ __webpack_require__.r(__webpack_exports__);
             //   "Your appointment has been deleted.",
             //   "success"
             // );
-            _this4.$toast.success("Appointment Deleted succesfully");
+            _this4.$toast.success("Time Deleted succesfully");
 
             _this4.$Progress.finish();
           })["catch"](function () {
@@ -84829,22 +84832,16 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "tbody",
-                    _vm._l(_vm.appointments, function(appointment) {
-                      return _c("tr", { key: appointment.id }, [
-                        _c("td", [_vm._v("1")]),
+                    _vm._l(_vm.times, function(time) {
+                      return _c("tr", { key: time.id }, [
+                        _c("td", [_vm._v(_vm._s(time.id))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Dakota Rice")]),
+                        _c("td", [_vm._v(_vm._s(time.time))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Niger")]),
+                        _c("td", [_vm._v(_vm._s(time.date))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Oud-Turnhout")]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-primary" }, [
-                          _vm._v("$36,738")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-primary" }, [
-                          _vm._v("$36,738")
+                        _c("td", [
+                          _vm._v(_vm._s(_vm._f("date")(time.created_at)))
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "text-primary" }, [
@@ -84855,7 +84852,7 @@ var render = function() {
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
-                                  return _vm.editModal(appointment)
+                                  return _vm.editModal(time)
                                 }
                               }
                             },
@@ -84873,7 +84870,7 @@ var render = function() {
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
-                                  return _vm.deleteAppointment(appointment.id)
+                                  return _vm.deleteAppointment(time.id)
                                 }
                               }
                             },
@@ -84948,30 +84945,63 @@ var render = function() {
                             [_vm._v("Time")]
                           ),
                           _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.time,
-                                expression: "form.time"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("time")
-                            },
-                            attrs: { type: "text", id: "time", name: "time" },
-                            domProps: { value: _vm.form.time },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.time,
+                                  expression: "form.time"
                                 }
-                                _vm.$set(_vm.form, "time", $event.target.value)
+                              ],
+                              staticClass: "form-control selectpicker",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("time")
+                              },
+                              attrs: {
+                                "data-style": "btn btn-link",
+                                id: "time",
+                                name: "time"
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "time",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
                               }
-                            }
-                          })
+                            },
+                            [
+                              _c("option", { attrs: { selected: "" } }, [
+                                _vm._v("8:00am")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", [_vm._v("10:00am")]),
+                              _vm._v(" "),
+                              _c("option", [_vm._v("12:00am")]),
+                              _vm._v(" "),
+                              _c("option", [_vm._v("2:00pm")]),
+                              _vm._v(" "),
+                              _c("option", [_vm._v("4:00pm")]),
+                              _vm._v(" "),
+                              _c("option", [_vm._v("6:00pm")])
+                            ]
+                          )
                         ]),
                         _vm._v(" "),
                         _c("has-error", {
@@ -85097,15 +85127,11 @@ var staticRenderFns = [
     return _c("thead", { staticClass: "text-primary" }, [
       _c("th", [_vm._v("ID")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Name")]),
+      _c("th", [_vm._v("Time")]),
       _vm._v(" "),
-      _c("th", [_vm._v("State")]),
+      _c("th", [_vm._v("Date")]),
       _vm._v(" "),
-      _c("th", [_vm._v("City")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Doctor")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Booked_at")]),
+      _c("th", [_vm._v("created_at")]),
       _vm._v(" "),
       _c("th", [_vm._v("Actions")])
     ])

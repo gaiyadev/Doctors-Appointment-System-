@@ -327,7 +327,7 @@ export default {
     }, 1000);
 
     Fire.$on("AfterDeleted", () => {
-      this.loadDoctort();
+      this.loadDoctor();
     });
     Fire.$on("AfterUpdated", () => {
       // this.loadDoctor();

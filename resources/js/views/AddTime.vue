@@ -18,27 +18,23 @@
                 <table class="table">
                   <thead class="text-primary">
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>State</th>
-                    <th>City</th>
-                    <th>Doctor</th>
-                    <th>Booked_at</th>
+                    <th>Time</th>
+                    <th>Date</th>
+                    <th>created_at</th>
                     <th>Actions</th>
                   </thead>
                   <tbody>
-                    <tr v-for="appointment in appointments" :key="appointment.id">
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td class="text-primary">$36,738</td>
-                      <td class="text-primary">$36,738</td>
+                    <tr v-for="time in times" :key="time.id">
+                      <td>{{ time.id }}</td>
+                      <td>{{time.time}}</td>
+                      <td>{{time.date}}</td>
+                      <td>{{ time.created_at |date }}</td>
                       <td class="text-primary">
-                        <button @click="editModal(appointment)" type="button" class="btn btn-info">
+                        <button @click="editModal(time)" type="button" class="btn btn-info">
                           <span class="material-icons">create</span>
                         </button>
                         <button
-                          @click="deleteAppointment(appointment.id)"
+                          @click="deleteAppointment(time.id)"
                           type="button"
                           class="btn btn-danger"
                         >
@@ -74,14 +70,21 @@
                 <form @submit.prevent=" editMode ? updateAppointment()  : createAppointment ()">
                   <div class="form-group">
                     <label for="time" class="text-primary">Time</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="time"
+                    <select
                       v-model="form.time"
+                      class="form-control selectpicker"
                       :class="{ 'is-invalid': form.errors.has('time') }"
+                      data-style="btn btn-link"
+                      id="time"
                       name="time"
-                    />
+                    >
+                      <option selected>8:00am</option>
+                      <option>10:00am</option>
+                      <option>12:00am</option>
+                      <option>2:00pm</option>
+                      <option>4:00pm</option>
+                      <option>6:00pm</option>
+                    </select>
                   </div>
                   <has-error :form="form" field="time"></has-error>
 
@@ -130,7 +133,7 @@ export default {
   data() {
     return {
       editMode: false,
-      appointments: {},
+      times: {},
       form: new Form({
         id: "",
         date: "",
@@ -146,7 +149,7 @@ export default {
         .put("api/time/" + this.form.id)
         .then(() => {
           this.$Progress.finish();
-          this.$toast.success("Appointment updated succesfully");
+          this.$toast.success("Time updated succesfully");
           $("#bookModal").modal("hide");
           Fire.$emit("AfterUpdated");
         })
@@ -156,11 +159,11 @@ export default {
         });
     },
     //edit modal
-    editModal(appointment) {
+    editModal(time) {
       this.editMode = true;
       this.form.reset();
       $("#bookModal").modal("show");
-      this.form.fill(appointment);
+      this.form.fill(time);
       console.log("click");
     },
     // add modal
@@ -175,7 +178,7 @@ export default {
         .post("api/time")
         .then(() => {
           this.$Progress.finish;
-          this.$toast.success("Appointment booked succesfully");
+          this.$toast.success("Time booked succesfully");
           $("#bookModal").modal("hide");
           this.form.reset();
         })
@@ -190,7 +193,7 @@ export default {
     loadAppointment() {
       axios
         .get("api/time")
-        .then(({ data }) => (this.appointments = data.data))
+        .then(({ data }) => (this.times = data.data))
         .catch(() => {
           this.$Progress.fail();
           // this.$toast.error(
@@ -218,7 +221,7 @@ export default {
               //   "Your appointment has been deleted.",
               //   "success"
               // );
-              this.$toast.success("Appointment Deleted succesfully");
+              this.$toast.success("Time Deleted succesfully");
               this.$Progress.finish();
             })
             .catch(() => {

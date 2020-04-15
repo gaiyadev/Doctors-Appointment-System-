@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TIME;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
+use App\Admin;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 
@@ -60,8 +65,8 @@ class TimeController extends Controller
     
       public function destroy($id)
     {
-        $Appointment =  Appointment::find($id);
-        $Appointment->delete();
+        $TIME =  TIME::find($id);
+        $TIME->delete();
         return ['message' => 'Post Deleted'];
 
     }
