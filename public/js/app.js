@@ -5641,15 +5641,17 @@ __webpack_require__.r(__webpack_exports__);
     loadDoctor: function loadDoctor() {
       var _this3 = this;
 
+      this.$Progress.start();
       axios.get("api/doctor").then(function (_ref) {
         var data = _ref.data;
-        return _this3.doctors = data.data;
+        return _this3.doctors = data;
       })["catch"](function () {
         _this3.$Progress.fail();
 
         _this3.$toast.error("Oops, something went wrong, fail to load appoimtments");
       });
     },
+    //..delete
     deleteDoctor: function deleteDoctor(id) {
       var _this4 = this;
 
@@ -5674,8 +5676,9 @@ __webpack_require__.r(__webpack_exports__);
             _this4.$toast.success("Doctor Deleted succesfully");
 
             _this4.$Progress.finish();
-          })["catch"](function () {
-            _this4.$toast.error("Oops, something went wrong, fail to delete appoimtments");
+          })["catch"](function () {// this.$toast.error(
+            //   "Oops, something went wrong, fail to delete appoimtments"
+            // );
           });
 
           _this4.$Progress.finish();
@@ -5689,7 +5692,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this5 = this;
 
     this.loadDoctor(); // Fire.$on("AfterCreated", () => {
-    //   this.loadAppointment(); to listen to component before updating
+    //   this.loadDoctor(); //to listen to component before updating
     // });
     //send request to the server every 5sec
 
@@ -5699,8 +5702,7 @@ __webpack_require__.r(__webpack_exports__);
     Fire.$on("AfterDeleted", function () {
       _this5.loadDoctort();
     });
-    Fire.$on("AfterUpdated", function () {
-      _this5.loadDoctor();
+    Fire.$on("AfterUpdated", function () {// this.loadDoctor();
     });
   }
 });
@@ -6627,6 +6629,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/ListAppointment.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/ListAppointment.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\doctors\\resources\\js\\views\\ListAppointment.vue: Unexpected token (102:0)\n\n  100 |   }\n  101 | };\n> 102 | };\n      | ^\n  103 | \n    at Parser._raise (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:742:17)\n    at Parser.raiseWithData (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.raise (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:729:17)\n    at Parser.unexpected (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:8757:16)\n    at Parser.parseExprAtom (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:10052:20)\n    at Parser.parseExprSubscripts (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9602:23)\n    at Parser.parseMaybeUnary (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9582:21)\n    at Parser.parseExprOps (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9452:23)\n    at Parser.parseMaybeConditional (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9425:23)\n    at Parser.parseMaybeAssign (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9380:21)\n    at Parser.parseExpression (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9332:23)\n    at Parser.parseStatementContent (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:11210:23)\n    at Parser.parseStatement (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:11081:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:11656:25)\n    at Parser.parseBlockBody (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:11642:10)\n    at Parser.parseTopLevel (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:11012:10)\n    at Parser.parse (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:12637:10)\n    at parse (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:12688:38)\n    at parser (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:93:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\core\\lib\\transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (C:\\xampp\\htdocs\\doctors\\node_modules\\gensync\\index.js:254:32)\n    at C:\\xampp\\htdocs\\doctors\\node_modules\\gensync\\index.js:266:13\n    at async.call.result.err.err (C:\\xampp\\htdocs\\doctors\\node_modules\\gensync\\index.js:216:11)");
 
 /***/ }),
 
@@ -83568,67 +83581,67 @@ var render = function() {
                 _c("table", { staticClass: "table" }, [
                   _vm._m(1),
                   _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("td", [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Dakota Rice")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Niger")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Oud-Turnhout")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-info",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.editModal(_vm.doctor)
-                              }
-                            }
-                          },
-                          [
-                            _c("span", { staticClass: "material-icons" }, [
-                              _vm._v("create")
-                            ])
-                          ]
-                        ),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.doctors, function(doctor) {
+                      return _c("tr", { key: doctor.id }, [
+                        _c("td", [_vm._v(_vm._s(doctor.id))]),
                         _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-danger",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.deleteDoctor(_vm.doctor.id)
+                        _c("td", [_vm._v(_vm._s(doctor.firstname))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(doctor.lastname))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(doctor.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(doctor.state))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(doctor.specialization))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(_vm._f("date")(doctor.created_at)))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-primary" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.editModal(doctor)
+                                }
                               }
-                            }
-                          },
-                          [
-                            _c("span", { staticClass: "material-icons" }, [
-                              _vm._v("remove_circle")
-                            ])
-                          ]
-                        )
+                            },
+                            [
+                              _c("span", { staticClass: "material-icons" }, [
+                                _vm._v("create")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteDoctor(doctor.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { staticClass: "material-icons" }, [
+                                _vm._v("remove_circle")
+                              ])
+                            ]
+                          )
+                        ])
                       ])
-                    ])
-                  ])
+                    }),
+                    0
+                  )
                 ])
               ])
             ])
@@ -86234,109 +86247,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-header card-header-primary" }, [
-                _c("h4", { staticClass: "card-title text-uppercase" }, [
-                  _vm._v("Appointment Table")
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "card-category" }, [
-                  _vm._v("Here is a list of your table")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "table-responsive" }, [
-                  _c("table", { staticClass: "table" }, [
-                    _c("thead", { staticClass: "text-primary" }, [
-                      _c("th", [_vm._v("ID")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Name")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("State")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("City")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Doctor")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Booked_at")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("1")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Dakota Rice")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Niger")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Oud-Turnhout")]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-primary" }, [
-                          _vm._v("$36,738")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-primary" }, [
-                          _vm._v("$36,738")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-primary" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger",
-                              attrs: { type: "button" }
-                            },
-                            [
-                              _c("span", { staticClass: "material-icons" }, [
-                                _vm._v("remove_circle")
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-info",
-                              attrs: { type: "button" }
-                            },
-                            [
-                              _c("span", { staticClass: "material-icons" }, [
-                                _vm._v("create")
-                              ])
-                            ]
-                          )
-                        ])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
+var render = function () {}
+var staticRenderFns = []
 
 
 
@@ -104703,15 +104615,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ListAppointment_vue_vue_type_template_id_71bf525c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListAppointment.vue?vue&type=template&id=71bf525c& */ "./resources/js/views/ListAppointment.vue?vue&type=template&id=71bf525c&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ListAppointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListAppointment.vue?vue&type=script&lang=js& */ "./resources/js/views/ListAppointment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ListAppointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ListAppointment_vue_vue_type_template_id_71bf525c___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ListAppointment_vue_vue_type_template_id_71bf525c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -104725,6 +104639,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/views/ListAppointment.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/ListAppointment.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/views/ListAppointment.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListAppointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ListAppointment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/ListAppointment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListAppointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

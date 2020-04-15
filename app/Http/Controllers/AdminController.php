@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 //use\App\Doctor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\User;
 use\App\Admin;
+use\App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,6 +31,14 @@ class AdminController extends Controller
     {
         return view('admin.home');
     }
+
+    public function fetch() {
+        return Admin::all();
+    }
+//... fetch all appt
+    public function allAppointment() {
+        return User::all();
+    }
     
     // public function index() {
     // $user = Auth::user()->id;
@@ -39,64 +47,61 @@ class AdminController extends Controller
 
 
       // Saving to database
-    public function store(Request $request) {
-         $request->validate([
+    public function store(Request $request) {        
+    //       //creating/saving users to db
+    $this->validation($request);
+    Admin::create($request->all());
+    //return $request->all();    
+    return ['message' => 'created user updated'];
+
+    }
+    public function validation ($request) {
+     return $request->validate([
              'firstname' => 'required|min:3|max:50',            
             'lastname' => 'required|max:255',
-            'email' => 'required',
+            'email' => 'required|email|unique:admins|max:255',
             'state' => 'required',
             'specialization' => 'required|min:3|max:255',
             'password' => ['required', 'min:8', 'same:password'],
             'confirmed_password' => ['required', 'min:8', 'same:password'], 
-]);
+            ]);
 
-    //       //saving to db
-    //    $Appointment = new Appointment;
-    //    $Appointment->email = $request->input('email');
-    //    $Appointment->doctor = $request->input('doctor');
-    //    $Appointment->date = $request->input('date');
-    //    $Appointment->time = $request->input('time');
-    //    $Appointment->purpose = $request->input('purpose');
-    //    $Appointment->user_id = auth()->user()->id;
-    //    $Appointment->save();
-
-        return ['message' => 'Post updated'];
-
-    }
+ }
 
 
-     //updating
+    //updating
     public function update(Request $request, $id)
     {
+          $user = Admin::find($id);
          $request->validate([
-             'email' => 'required|min:3|max:50',            
-            'doctor' => 'required|max:255',
-            'date' => 'required',
-            'time' => 'required',
-            'purpose' => 'required|min:3|max:255',
+            'firstname' => 'required|min:3|max:50',            
+            'lastname' => 'required|max:255',
+            'email' => 'required|max:191|email|unique:users,email,' . $user->id,
+            'state' => 'required',
+            'specialization' => 'required|min:3|max:255',
+             'password' => ['required', 'min:8', 'same:password'],
+            'confirmed_password' => ['required', 'min:8', 'same:password'], 
             ]);
 
          //update post
-       $Appointment =  Appointment::find($id);
-       $Appointment->email = $request->input('email');
-       $Appointment->doctor = $request->input('doctor');
-       $Appointment->date = $request->input('date');
-       $Appointment->time = $request->input('time');
-       $Appointment->purpose = $request->input('purpose');
-       $Appointment->user_id = auth()->user()->id;
-       $Appointment->save();
-
-
-        return ['message' => 'Post updated'];
+       $Admin =  Admin::find($id);
+       $Admin->firstname = $request->input('firstname');
+       $Admin->lastname = $request->input('lastname');
+       $Admin->email = $request->input('email');
+       $Admin->state = $request->input('state');
+       $Admin->specialization = $request->input('specialization');      
+       $Admin->user_id = auth()->user()->id;
+       $Admin->save();
+        return ['message' => 'Admin updated'];
     }
 
 
     
       public function destroy($id)
     {
-        $Appointment =  Appointment::find($id);
-        $Appointment->delete();
-        return ['message' => 'Post Deleted'];
+        $Admin =  Admin::find($id);
+        $Admin->delete();
+        return ['message' => 'Admin Deleted'];
 
     }
 

@@ -47,9 +47,12 @@ Route::put('api/appointment/{id}', 'AppointmentController@update');
 
 //api calls for doctor(aadmin)
 Route::post('api/doctor', 'AdminController@store');
-Route::get('api/doctor', 'AdminController@index');
-Route::delete('api/doctor/{id}', 'AdminController@destroy');
+ Route::get('api/doctor', 'AdminController@fetch');
+ Route::delete('api/doctor/{id}', 'AdminController@destroy');
 Route::put('api/doctor/{id}', 'AdminController@update');
+
+//fetch from user table
+Route::get('api/user/all', 'AdminController@allAppointment');
 
 //..get use email
 //Route::get('api/userEmail', 'AppointmentController@getEmail');

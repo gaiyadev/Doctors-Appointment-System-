@@ -22,9 +22,9 @@
                     <th>Actions</th>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
+                    <t v-for="appointment in appointments " :key="appointment.id">
+                      <td> {{ appointment.id}} </td>
+                      <td>   {{appointment.email }} </td>
                       <td>Niger</td>
                       <td>Oud-Turnhout</td>
                       <td class="text-primary">$36,738</td>
@@ -48,3 +48,59 @@
     </div>
   </div>
 </template>
+
+
+
+<script>
+export default {
+  data() {
+    return {
+      appointments: {},
+      form: new Form({
+        id: "",
+        email: "",
+        doctor: "",
+        date: "",
+        time: "",
+        status: "",
+        purpose: ""
+      })
+    };
+  },
+  methods: {
+    loadAppointment() {
+      this.$Progress.start();
+      axios
+        .get("api/user/all")
+        .then(({ data }) => (this.appointments = data))
+        .catch(() => {
+          this.$Progress.fail();
+          this.$toast.error(
+            "Oops, something went wrong, fail to load appoimtments"
+          );
+        });
+    }
+  },
+   mounted() {
+    this.loadAppointment();
+    // Fire.$on("AfterCreated", () => {
+    //   this.loadAppointment(); to listen to component before updating
+    // });
+    //send request to the server every 5sec
+    setInterval(() => {
+      this.loadAppointment();
+    }, 1000);
+
+    Fire.$on("AfterDeleted", () => {
+      this.loadAppointment();
+    });
+    Fire.$on("AfterUpdated", () => {
+      this.loadAppointment();
+    });
+  }
+};
+};
+</script>
+
+<style>
+</style>

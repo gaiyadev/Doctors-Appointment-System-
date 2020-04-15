@@ -26,14 +26,14 @@
                     <th>Actions</th>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td class="text-primary">$36,738</td>
-                      <td class="text-primary">$36,738</td>
-                      <td class="text-primary">$36,738</td>
+                    <tr v-for="doctor in doctors" :key="doctor.id">
+                      <td>{{ doctor.id }}</td>
+                      <td>{{doctor.firstname }}</td>
+                      <td>{{doctor.lastname }}</td>
+                      <td>{{doctor.email }}</td>
+                      <td>{{ doctor.state }}</td>
+                      <td>{{ doctor.specialization }}</td>
+                      <td>{{ doctor.created_at | date }}</td>
                       <td class="text-primary">
                         <button @click="editModal(doctor)" type="button" class="btn btn-info">
                           <span class="material-icons">create</span>
@@ -264,9 +264,11 @@ export default {
       // Fire.$emit("AfterCreated");
     },
     loadDoctor() {
+      this.$Progress.start();
+
       axios
         .get("api/doctor")
-        .then(({ data }) => (this.doctors = data.data))
+        .then(({ data }) => (this.doctors = data))
         .catch(() => {
           this.$Progress.fail();
           this.$toast.error(
@@ -274,6 +276,7 @@ export default {
           );
         });
     },
+    //..delete
     deleteDoctor(id) {
       Swal.fire({
         title: "Are you sure?",
@@ -298,9 +301,9 @@ export default {
               this.$Progress.finish();
             })
             .catch(() => {
-              this.$toast.error(
-                "Oops, something went wrong, fail to delete appoimtments"
-              );
+              // this.$toast.error(
+              //   "Oops, something went wrong, fail to delete appoimtments"
+              // );
             });
 
           this.$Progress.finish();
@@ -313,7 +316,7 @@ export default {
   mounted() {
     this.loadDoctor();
     // Fire.$on("AfterCreated", () => {
-    //   this.loadAppointment(); to listen to component before updating
+    //   this.loadDoctor(); //to listen to component before updating
     // });
     //send request to the server every 5sec
     setInterval(() => {
@@ -324,7 +327,7 @@ export default {
       this.loadDoctort();
     });
     Fire.$on("AfterUpdated", () => {
-      this.loadDoctor();
+      // this.loadDoctor();
     });
   }
 };

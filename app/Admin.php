@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 
 class Admin extends Authenticatable
@@ -21,7 +24,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'firstname', 'email', 'password','lastname', 'state', 'specialization',
     ];
 
      /**
@@ -52,8 +55,8 @@ class Admin extends Authenticatable
     return strtoupper($value);
     }
 
-    // public function setPasswordAttribute($value) {
-    //     $this->attributes['password'] = Hash::make($value);
-    // }
+    public function setPasswordAttribute($value) {
+        $this->attributes['password'] = Hash::make($value);
+    }
 
 }

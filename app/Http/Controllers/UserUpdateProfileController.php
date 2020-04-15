@@ -25,6 +25,7 @@ class UserUpdateProfileController extends Controller
             'dob' => 'required',
             'email' => 'required|max:191|email|unique:users,email,' . $user->id,
             
+            
 ]);
 
           //saving to db
