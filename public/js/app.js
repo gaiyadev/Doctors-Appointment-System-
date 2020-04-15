@@ -5786,10 +5786,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log("Component mounted.");
-  }
+  data: function data() {
+    return {
+      complains: {},
+      form: new Form({
+        id: "",
+        old_password: "",
+        password: "",
+        password_confirmation: ""
+      })
+    };
+  },
+  methods: {
+    changePassword: function changePassword() {
+      var _this = this;
+
+      this.$Progress.start();
+      this.form.put("api/adminPassword").then(function () {
+        _this.$toast.success("Password changed succesfully");
+
+        _this.form.reset();
+
+        _this.$Progress.finish();
+
+        _this.$router.go();
+      })["catch"](function () {
+        _this.$Progress.fail();
+
+        _this.$toast.error("Oops, please correct the errors and try again");
+      });
+    }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -84733,19 +84771,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("form", { staticClass: "form-horizontal" }, [
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "form",
+      {
+        staticClass: "form-horizontal",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.changePassword($event)
+          }
+        }
+      },
+      [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header card-header-primary" }, [
-            _c("h4", { staticClass: "card-title" }, [_vm._v("Change password")])
-          ]),
+          _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "row" }),
@@ -84761,18 +84801,51 @@ var staticRenderFns = [
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      input: "",
-                      type: "password",
-                      name: "old_password",
-                      id: "input-current-password",
-                      placeholder: "Current Password"
-                    }
-                  })
-                ])
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.old_password,
+                          expression: "form.old_password"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.form.errors.has("old_password")
+                      },
+                      attrs: {
+                        input: "",
+                        type: "password",
+                        name: "old_password",
+                        id: "input-current-password",
+                        placeholder: "Current Password"
+                      },
+                      domProps: { value: _vm.form.old_password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.form,
+                            "old_password",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("has-error", {
+                      attrs: { form: _vm.form, field: "old_password" }
+                    })
+                  ],
+                  1
+                )
               ])
             ]),
             _vm._v(" "),
@@ -84787,17 +84860,44 @@ var staticRenderFns = [
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      name: "password",
-                      id: "input-password",
-                      type: "password",
-                      placeholder: "New Password"
-                    }
-                  })
-                ])
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.password,
+                          expression: "form.password"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.form.errors.has("password") },
+                      attrs: {
+                        name: "password",
+                        id: "input-password",
+                        type: "password",
+                        placeholder: "New Password"
+                      },
+                      domProps: { value: _vm.form.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "password", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("has-error", {
+                      attrs: { form: _vm.form, field: "password" }
+                    })
+                  ],
+                  1
+                )
               ])
             ]),
             _vm._v(" "),
@@ -84812,30 +84912,81 @@ var staticRenderFns = [
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      name: "password_confirmation",
-                      id: "input-password-confirmation",
-                      type: "password",
-                      placeholder: "Confirm New Password"
-                    }
-                  })
-                ])
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.password_confirmation,
+                          expression: "form.password_confirmation"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.form.errors.has(
+                          "password_confirmation"
+                        )
+                      },
+                      attrs: {
+                        name: "password_confirmation",
+                        id: "input-password-confirmation",
+                        type: "password",
+                        placeholder: "Confirm New Password"
+                      },
+                      domProps: { value: _vm.form.password_confirmation },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.form,
+                            "password_confirmation",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("has-error", {
+                      attrs: { form: _vm.form, field: "password_confirmation" }
+                    })
+                  ],
+                  1
+                )
               ])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-footer ml-auto mr-auto" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Change password")]
-            )
-          ])
+          _vm._m(1)
         ])
-      ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header card-header-primary" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Change password")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer ml-auto mr-auto" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Change password")]
+      )
     ])
   }
 ]

@@ -53,6 +53,7 @@ Route::put('api/doctor/{id}', 'AdminController@update');
 Route::get('api/complainlist', 'AdminController@complain');
 Route::get('api/admin', 'AdminUpdateProfileController@show');
 Route::put('api/admin/{id}', 'AdminUpdateProfileController@updateInfo');
+Route::put('api/adminPassword/', 'AdminChangePasswordCOntroller@changePassword');
 
 
 //fetch from user table
