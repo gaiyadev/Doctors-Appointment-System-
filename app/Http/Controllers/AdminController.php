@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use\App\Doctor;
+//use\App\Doctor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use\App\Admin;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 
 
@@ -38,22 +41,24 @@ class AdminController extends Controller
       // Saving to database
     public function store(Request $request) {
          $request->validate([
-             'firatname' => 'required|min:3|max:50',            
+             'firstname' => 'required|min:3|max:50',            
             'lastname' => 'required|max:255',
             'email' => 'required',
             'state' => 'required',
             'specialization' => 'required|min:3|max:255',
+            'password' => ['required', 'min:8', 'same:password'],
+            'confirmed_password' => ['required', 'min:8', 'same:password'], 
 ]);
 
-          //saving to db
-       $Appointment = new Appointment;
-       $Appointment->email = $request->input('email');
-       $Appointment->doctor = $request->input('doctor');
-       $Appointment->date = $request->input('date');
-       $Appointment->time = $request->input('time');
-       $Appointment->purpose = $request->input('purpose');
-       $Appointment->user_id = auth()->user()->id;
-       $Appointment->save();
+    //       //saving to db
+    //    $Appointment = new Appointment;
+    //    $Appointment->email = $request->input('email');
+    //    $Appointment->doctor = $request->input('doctor');
+    //    $Appointment->date = $request->input('date');
+    //    $Appointment->time = $request->input('time');
+    //    $Appointment->purpose = $request->input('purpose');
+    //    $Appointment->user_id = auth()->user()->id;
+    //    $Appointment->save();
 
         return ['message' => 'Post updated'];
 

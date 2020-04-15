@@ -110,6 +110,33 @@
                     />
                     <has-error :form="form" field="email"></has-error>
                   </div>
+
+                  <div class="form-group">
+                    <label for="password" class="text-primary">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('password') }"
+                      id="password"
+                      v-model="form.password"
+                      name="password"
+                    />
+                    <has-error :form="form" field="password"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="Cpassword" class="text-primary">Confirm Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('confirmed_password') }"
+                      id="Cpassword"
+                      v-model="form.confirmed_password"
+                      name="confirmed_password"
+                    />
+                    <has-error :form="form" field="confirmed_password"></has-error>
+                  </div>
+
                   <div class="form-group">
                     <label for="state" class="text-primary">State</label>
                     <select
@@ -224,7 +251,7 @@ export default {
         .post("api/doctor")
         .then(() => {
           this.$Progress.finish;
-          this.$toast.success("Doctor booked succesfully");
+          this.$toast.success("Doctor added successfully");
           $("#bookModal").modal("hide");
           this.form.reset();
         })
@@ -290,7 +317,7 @@ export default {
     // });
     //send request to the server every 5sec
     setInterval(() => {
-      this.loadAppointment();
+      this.loadDoctor();
     }, 1000);
 
     Fire.$on("AfterDeleted", () => {
