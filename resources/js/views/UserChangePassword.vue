@@ -91,12 +91,13 @@ export default {
       this.form
         .post("api/change")
         .then(() => {
-          this.$Progress.finish;
           this.$toast.success("Password changed succesfully");
           this.form.reset();
+          this.$Progress.finish();
+          this.$router.go();
         })
         .catch(() => {
-          this.$Progress.fail;
+          this.$Progress.fail();
           this.$toast.error("Oops, please correct the errors and try again");
         });
     }

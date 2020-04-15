@@ -18,16 +18,18 @@ class UserUpdateProfileController extends Controller
 
      // Saving to database
     public function updateInfo(Request $request, $id) {
+        $user = User::find($id);
          $request->validate([
-             'firstname' => 'required|min:3|max:50',            
+             'name' => 'required|min:3|max:50',            
             'lastname' => 'required|min:3|max:55',
             'dob' => 'required',
-            'email' => 'required',
+            'email' => 'required|max:191|email|unique:users,email,' . $user->id,
+            
 ]);
 
           //saving to db
-        $User =  User::find($id);
-       $User->firstname = $request->input('firstname');
+      $User =  User::find($id);
+       $User->name = $request->input('name');
        $User->lastname = $request->input('lastname');
        $User->dob = $request->input('dob');
        $User->email = $request->input('email');

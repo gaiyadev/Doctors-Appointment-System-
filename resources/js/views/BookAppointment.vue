@@ -260,6 +260,7 @@ export default {
         confirmButtonText: "Yes, delete it!"
       }).then(result => {
         if (result.value) {
+          this.$Progress.start();
           this.form
             .delete("api/appointment/" + id)
             .then(() => {
@@ -269,6 +270,7 @@ export default {
               //   "success"
               // );
               this.$toast.success("Appointment Deleted succesfully");
+              this.$Progress.finish();
             })
             .catch(() => {
               this.$toast.error(
@@ -280,6 +282,17 @@ export default {
           Fire.$emit("AfterDeleted");
         }
       });
+    },
+
+    getUser() {
+      this.$Progress.start();
+      axios
+        .get("api/profile")
+        .then(({ data }) => this.form.fill(data))
+        .catch(() => {
+          this.$Progress.fail();
+          this.$toast.error("Oops, something went wrong, fail to load profile");
+        });
     }
   },
 
@@ -291,7 +304,7 @@ export default {
     //send request to the server every 5sec
     setInterval(() => {
       this.loadAppointment();
-    }, 500);
+    }, 1000);
 
     Fire.$on("AfterDeleted", () => {
       this.loadAppointment();

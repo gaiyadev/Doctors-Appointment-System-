@@ -5814,6 +5814,8 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.value) {
+          _this4.$Progress.start();
+
           _this4.form["delete"]("api/appointment/" + id).then(function () {
             // Swal.fire(
             //   "Deleted!",
@@ -5821,6 +5823,8 @@ __webpack_require__.r(__webpack_exports__);
             //   "success"
             // );
             _this4.$toast.success("Appointment Deleted succesfully");
+
+            _this4.$Progress.finish();
           })["catch"](function () {
             _this4.$toast.error("Oops, something went wrong, fail to delete appoimtments");
           });
@@ -5830,10 +5834,23 @@ __webpack_require__.r(__webpack_exports__);
           Fire.$emit("AfterDeleted");
         }
       });
+    },
+    getUser: function getUser() {
+      var _this5 = this;
+
+      this.$Progress.start();
+      axios.get("api/profile").then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.form.fill(data);
+      })["catch"](function () {
+        _this5.$Progress.fail();
+
+        _this5.$toast.error("Oops, something went wrong, fail to load profile");
+      });
     }
   },
   mounted: function mounted() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.loadAppointment(); // Fire.$on("AfterCreated", () => {
     //   this.loadAppointment(); to listen to component before updating
@@ -5841,13 +5858,13 @@ __webpack_require__.r(__webpack_exports__);
     //send request to the server every 5sec
 
     setInterval(function () {
-      _this5.loadAppointment();
-    }, 500);
+      _this6.loadAppointment();
+    }, 1000);
     Fire.$on("AfterDeleted", function () {
-      _this5.loadAppointment();
+      _this6.loadAppointment();
     });
     Fire.$on("AfterUpdated", function () {
-      _this5.loadAppointment();
+      _this6.loadAppointment();
     });
   }
 });
@@ -6047,6 +6064,7 @@ __webpack_require__.r(__webpack_exports__);
     loadComplain: function loadComplain() {
       var _this2 = this;
 
+      this.$Progress.start();
       axios.get("api/complain").then(function (_ref) {
         var data = _ref.data;
         return _this2.complains = data.data;
@@ -6071,6 +6089,8 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.value) {
+          _this3.$Progress.start();
+
           _this3.form["delete"]("api/complain/" + id).then(function () {
             _this3.$toast.success("Complain Deleted succesfully");
           })["catch"](function () {
@@ -6449,13 +6469,15 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$Progress.start();
       this.form.post("api/change").then(function () {
-        _this.$Progress.finish;
-
         _this.$toast.success("Password changed succesfully");
 
         _this.form.reset();
+
+        _this.$Progress.finish();
+
+        _this.$router.go();
       })["catch"](function () {
-        _this.$Progress.fail;
+        _this.$Progress.fail();
 
         _this.$toast.error("Oops, please correct the errors and try again");
       });
@@ -6578,11 +6600,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    loadProfile: function loadProfile(id) {
+    loadProfile: function loadProfile() {
       var _this = this;
 
       this.$Progress.start();
-      axios.get("api/user" + id).then(function (_ref) {
+      axios.get("api/profile").then(function (_ref) {
         var data = _ref.data;
         return _this.form.fill(data);
       })["catch"](function () {
@@ -6591,15 +6613,15 @@ __webpack_require__.r(__webpack_exports__);
         _this.$toast.error("Oops, something went wrong, fail to load profile");
       });
     },
-    updateUser: function updateUser() {
+    //...
+    updateUser: function updateUser(id) {
       var _this2 = this;
 
       this.$Progress.start();
-      this.form.put("api/user").then(function () {
+      this.form.put("api/user/" + this.form.id).then(function () {
+        _this2.$toast.success("Profile updated succesfully");
+
         _this2.$Progress.finish;
-
-        _this2.$toast.success("Profile booked succesfully"); //$("#bookModal").modal("hide");
-
 
         _this2.form.reset();
       })["catch"](function () {
@@ -6609,7 +6631,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     this.loadProfile();
     console.log("Component mounted.");
   }
@@ -86219,7 +86241,7 @@ var staticRenderFns = [
           staticClass: "btn btn-primary btn-lg btn-block",
           attrs: { type: "submit" }
         },
-        [_vm._v("Save")]
+        [_vm._v("Update")]
       )
     ])
   }
@@ -102890,9 +102912,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _kugatsu_vuenotification__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_kugatsu_vuenotification__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var fullcalendar_dist_fullcalendar_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! fullcalendar/dist/fullcalendar.css */ "./node_modules/fullcalendar/dist/fullcalendar.css");
-/* harmony import */ var fullcalendar_dist_fullcalendar_css__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(fullcalendar_dist_fullcalendar_css__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var vue_full_calendar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue-full-calendar */ "./node_modules/vue-full-calendar/index.js");
+/* harmony import */ var fullcalendar_dist_fullcalendar_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! fullcalendar/dist/fullcalendar.css */ "./node_modules/fullcalendar/dist/fullcalendar.css");
+/* harmony import */ var fullcalendar_dist_fullcalendar_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(fullcalendar_dist_fullcalendar_css__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var vue_full_calendar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue-full-calendar */ "./node_modules/vue-full-calendar/index.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -102951,7 +102973,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_kugatsu_vuenotification__WEBPACK
 });
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_full_calendar__WEBPACK_IMPORTED_MODULE_11__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_full_calendar__WEBPACK_IMPORTED_MODULE_10__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('uppercase', function (text) {
   return text.toUpperCase();
 });
@@ -103539,15 +103561,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************!*\
   !*** ./resources/js/views/Calender.vue ***!
   \*****************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Calender_vue_vue_type_template_id_3ce692d9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Calender.vue?vue&type=template&id=3ce692d9& */ "./resources/js/views/Calender.vue?vue&type=template&id=3ce692d9&");
 /* harmony import */ var _Calender_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Calender.vue?vue&type=script&lang=js& */ "./resources/js/views/Calender.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Calender_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Calender_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -103577,7 +103598,7 @@ component.options.__file = "resources/js/views/Calender.vue"
 /*!******************************************************************!*\
   !*** ./resources/js/views/Calender.vue?vue&type=script&lang=js& ***!
   \******************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

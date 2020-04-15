@@ -80,7 +80,7 @@
           </div>
         </div>
         <div class="card-footer ml-auto mr-auto">
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
         </div>
       </div>
     </form>
@@ -105,7 +105,7 @@ export default {
     loadProfile() {
       this.$Progress.start();
       axios
-        .get("api/user")
+        .get("api/profile")
         .then(({ data }) => this.form.fill(data))
         .catch(() => {
           this.$Progress.fail();
@@ -116,11 +116,10 @@ export default {
     updateUser(id) {
       this.$Progress.start();
       this.form
-        .put("api/user" + id)
+        .put("api/user/" + this.form.id)
         .then(() => {
+          this.$toast.success("Profile updated succesfully");
           this.$Progress.finish;
-          this.$toast.success("Profile booked succesfully");
-          //$("#bookModal").modal("hide");
           this.form.reset();
         })
         .catch(() => {
@@ -129,7 +128,7 @@ export default {
         });
     }
   },
-  mounted() {
+  created() {
     this.loadProfile();
     console.log("Component mounted.");
   }

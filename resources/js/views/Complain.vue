@@ -138,6 +138,7 @@ export default {
     },
 
     loadComplain() {
+      this.$Progress.start();
       axios
         .get("api/complain")
         .then(({ data }) => (this.complains = data.data))
@@ -160,6 +161,7 @@ export default {
         confirmButtonText: "Yes, delete it!"
       }).then(result => {
         if (result.value) {
+          this.$Progress.start();
           this.form
             .delete("api/complain/" + id)
             .then(() => {
