@@ -5713,6 +5713,275 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AddTime.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/AddTime.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      editMode: false,
+      appointments: {},
+      form: new Form({
+        id: "",
+        date: "",
+        time: ""
+      })
+    };
+  },
+  methods: {
+    updateAppointment: function updateAppointment() {
+      var _this = this;
+
+      this.$Progress.start();
+      this.form.put("api/appointment/" + this.form.id).then(function () {
+        _this.$Progress.finish();
+
+        _this.$toast.success("Appointment updated succesfully");
+
+        $("#bookModal").modal("hide");
+        Fire.$emit("AfterUpdated");
+      })["catch"](function () {
+        _this.$Progress.fail();
+
+        _this.$toast.error("Oops, please field the form again");
+      });
+    },
+    //edit modal
+    editModal: function editModal(appointment) {
+      this.editMode = true;
+      this.form.reset();
+      $("#bookModal").modal("show");
+      this.form.fill(appointment);
+      console.log("click");
+    },
+    // add modal
+    newModal: function newModal() {
+      this.editMode = false;
+      this.form.reset();
+      $("#bookModal").modal("show");
+    },
+    createAppointment: function createAppointment() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      this.form.post("api/appointment").then(function () {
+        _this2.$Progress.finish;
+
+        _this2.$toast.success("Appointment booked succesfully");
+
+        $("#bookModal").modal("hide");
+
+        _this2.form.reset();
+      })["catch"](function () {
+        _this2.$Progress.fail;
+
+        _this2.$toast.error("Oops, please field the form again");
+      }); // this.form.reset();
+      // Fire.$emit("AfterCreated");
+    },
+    loadAppointment: function loadAppointment() {
+      var _this3 = this;
+
+      axios.get("api/appointment").then(function (_ref) {
+        var data = _ref.data;
+        return _this3.appointments = data.data;
+      })["catch"](function () {
+        _this3.$Progress.fail(); // this.$toast.error(
+        //   "Oops, something went wrong, fail to load appoimtments"
+        // );
+
+      });
+    },
+    deleteAppointment: function deleteAppointment(id) {
+      var _this4 = this;
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(function (result) {
+        if (result.value) {
+          _this4.$Progress.start();
+
+          _this4.form["delete"]("api/appointment/" + id).then(function () {
+            // Swal.fire(
+            //   "Deleted!",
+            //   "Your appointment has been deleted.",
+            //   "success"
+            // );
+            _this4.$toast.success("Appointment Deleted succesfully");
+
+            _this4.$Progress.finish();
+          })["catch"](function () {
+            _this4.$toast.error("Oops, something went wrong, fail to delete appoimtments");
+          });
+
+          _this4.$Progress.finish();
+
+          Fire.$emit("AfterDeleted");
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this5 = this;
+
+    this.loadAppointment(); // Fire.$on("AfterCreated", () => {
+    //   this.loadAppointment(); to listen to component before updating
+    // });
+    //send request to the server every 5sec
+
+    setInterval(function () {
+      _this5.loadAppointment();
+    }, 1000);
+    Fire.$on("AfterDeleted", function () {
+      _this5.loadAppointment();
+    });
+    Fire.$on("AfterUpdated", function () {
+      _this5.loadAppointment();
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AdminChangePassword.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/AdminChangePassword.vue?vue&type=script&lang=js& ***!
@@ -84532,66 +84801,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-header card-header-primary" }, [
-                _c("h4", { staticClass: "card-title text-uppercase" }, [
-                  _vm._v("Availability Table")
-                ]),
+  return _c("div", { staticClass: "content" }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.newModal }
+                  },
+                  [
+                    _c("span", { staticClass: "material-icons" }, [
+                      _vm._v("add_circle")
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
-                _c("p", { staticClass: "card-category" }, [
-                  _vm._v("Here is a list of your Availability")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "table-responsive" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "modal",
-                        "data-target": "#bookModal"
-                      }
-                    },
-                    [
-                      _c("span", { staticClass: "material-icons" }, [
-                        _vm._v("add_circle")
-                      ])
-                    ]
-                  ),
+                _c("table", { staticClass: "table" }, [
+                  _vm._m(1),
                   _vm._v(" "),
-                  _c("table", { staticClass: "table" }, [
-                    _c("thead", { staticClass: "text-primary" }, [
-                      _c("th", [_vm._v("ID")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Name")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("State")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("City")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Doctor")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Booked_at")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Actions")])
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.appointments, function(appointment) {
+                      return _c("tr", { key: appointment.id }, [
                         _c("td", [_vm._v("1")]),
                         _vm._v(" "),
                         _c("td", [_vm._v("Dakota Rice")]),
@@ -84612,12 +84851,17 @@ var staticRenderFns = [
                           _c(
                             "button",
                             {
-                              staticClass: "btn btn-danger",
-                              attrs: { type: "button" }
+                              staticClass: "btn btn-info",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.editModal(appointment)
+                                }
+                              }
                             },
                             [
                               _c("span", { staticClass: "material-icons" }, [
-                                _vm._v("remove_circle")
+                                _vm._v("create")
                               ])
                             ]
                           ),
@@ -84625,59 +84869,75 @@ var staticRenderFns = [
                           _c(
                             "button",
                             {
-                              staticClass: "btn btn-info",
-                              attrs: { type: "button" }
+                              staticClass: "btn btn-danger",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteAppointment(appointment.id)
+                                }
+                              }
                             },
                             [
                               _c("span", { staticClass: "material-icons" }, [
-                                _vm._v("create")
+                                _vm._v("remove_circle")
                               ])
                             ]
                           )
                         ])
                       ])
-                    ])
-                  ])
+                    }),
+                    0
+                  )
                 ])
               ])
             ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "modal fade",
-          attrs: {
-            id: "bookModal",
-            tabindex: "-1",
-            role: "dialog",
-            "aria-labelledby": "exampleModalLabel",
-            "aria-hidden": "true"
-          }
-        },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "modal-dialog modal-lg",
-              attrs: { role: "document" }
-            },
-            [
-              _c("div", { staticClass: "modal-content" }, [
-                _c("div", { staticClass: "modal-header" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [
-                  _c("div", { staticClass: "card card-nav-tabs" }, [
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "bookModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "card card-nav-tabs" }, [
+                  _c(
+                    "div",
+                    { staticClass: "card-header card-header-primary" },
+                    [_vm._v("Add Availability")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
                     _c(
-                      "div",
-                      { staticClass: "card-header card-header-primary" },
-                      [_vm._v("Add Availability")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("form", [
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            _vm.editMode
+                              ? _vm.updateAppointment()
+                              : _vm.createAppointment()
+                          }
+                        }
+                      },
+                      [
                         _c("div", { staticClass: "form-group" }, [
                           _c(
                             "label",
@@ -84689,63 +84949,185 @@ var staticRenderFns = [
                           ),
                           _vm._v(" "),
                           _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.time,
+                                expression: "form.time"
+                              }
+                            ],
                             staticClass: "form-control",
-                            attrs: { type: "text", id: "time", name: "time" }
+                            class: {
+                              "is-invalid": _vm.form.errors.has("time")
+                            },
+                            attrs: { type: "text", id: "time", name: "time" },
+                            domProps: { value: _vm.form.time },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "time", $event.target.value)
+                              }
+                            }
                           })
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "text-primary",
-                              attrs: { for: "date" }
-                            },
-                            [_vm._v("Date")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: { type: "Date", id: "date", name: "date" }
-                          })
-                        ]),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "time" }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "text-primary",
+                                attrs: { for: "date" }
+                              },
+                              [_vm._v("Date")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.date,
+                                  expression: "form.date"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("date")
+                              },
+                              attrs: { type: "Date", id: "date", name: "date" },
+                              domProps: { value: _vm.form.date },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "date",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "date" }
+                            })
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
                         _c(
                           "button",
                           {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.editMode,
+                                expression: "editMode"
+                              }
+                            ],
                             staticClass: "btn btn-primary btn-lg btn-block",
                             attrs: { type: "submit", name: "submit" }
                           },
-                          [_vm._v("ADD")]
+                          [_vm._v("UPDATE TIME")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.editMode,
+                                expression: "!editMode"
+                              }
+                            ],
+                            staticClass: "btn btn-primary btn-lg btn-block",
+                            attrs: { type: "submit", name: "submit" }
+                          },
+                          [_vm._v("ADD TIME")]
                         )
-                      ])
-                    ])
+                      ],
+                      1
+                    )
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-footer" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      attrs: { type: "button", "data-dismiss": "modal" }
-                    },
-                    [_vm._v("Close")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button" }
-                    },
-                    [_vm._v("Clear")]
-                  )
                 ])
-              ])
-            ]
-          )
-        ]
+              ]),
+              _vm._v(" "),
+              _vm._m(2)
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header card-header-primary" }, [
+      _c("h4", { staticClass: "card-title text-uppercase" }, [
+        _vm._v("Availability Table")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-category" }, [
+        _vm._v("Here is a list of your Availability")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "text-primary" }, [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("State")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("City")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Doctor")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Booked_at")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Actions")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Clear")]
       )
     ])
   }
@@ -104546,15 +104928,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AddTime_vue_vue_type_template_id_653d643f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddTime.vue?vue&type=template&id=653d643f& */ "./resources/js/views/AddTime.vue?vue&type=template&id=653d643f&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _AddTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddTime.vue?vue&type=script&lang=js& */ "./resources/js/views/AddTime.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _AddTime_vue_vue_type_template_id_653d643f___WEBPACK_IMPORTED_MODULE_0__["render"],
   _AddTime_vue_vue_type_template_id_653d643f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -104568,6 +104952,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/views/AddTime.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/AddTime.vue?vue&type=script&lang=js&":
+/*!*****************************************************************!*\
+  !*** ./resources/js/views/AddTime.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AddTime.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AddTime.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
