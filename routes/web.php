@@ -51,8 +51,11 @@ Route::get('api/complain', 'ComplainController@index');
 Route::delete('api/complain/{id}', 'ComplainController@destroy');
 
 
-
+//change password for user
 Route::post('api/change', 'UserChangePasswordController@changePassword');
+//update user4 info
+Route::get('api/user', 'UserUpdateProfileController@show');
+Route::put('api/user/{id}', 'UserUpdateProfileController@updateInfo');
 
 
 

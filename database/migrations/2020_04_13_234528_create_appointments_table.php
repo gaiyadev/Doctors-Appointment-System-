@@ -20,6 +20,7 @@ class CreateAppointmentsTable extends Migration
             $table->date('date');
             $table->string('time');
             $table->mediumText('purpose');
+            $table->boolean('status')->nullable();
             $table->integer('user_id');
             $table->timestamps();
         });

@@ -24,6 +24,7 @@
                     <th>Time</th>
                     <th>Purpose</th>
                     <th>Booked_at</th>
+                    <th>Status</th>
                     <th>Actions</th>
                   </thead>
                   <tbody>
@@ -35,6 +36,7 @@
                       <td>{{ appointment.time }}</td>
                       <td>{{ appointment.purpose | uppercase }}</td>
                       <td>{{ appointment.created_at | date }}</td>
+                      <td>{{ appointment.status }}</td>
                       <td class="text-primary">
                         <button @click="editModal(appointment)" type="button" class="btn btn-info">
                           <span class="material-icons">create</span>
@@ -182,6 +184,7 @@ export default {
         doctor: "",
         date: "",
         time: "",
+        status: "",
         purpose: ""
       })
     };
