@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form autocomplete="off" class="form-horizontal">
+    <form @click="updateUser" class="form-horizontal">
       <div class="card">
         <div class="card-header card-header-primary">
           <h4 class="card-title">Edit Profile</h4>
@@ -78,7 +78,47 @@
 
 <script>
 export default {
-  mounted() {
+  data() {
+    return {
+      admins: {},
+      form: new Form({
+        id: "",
+        firstname: "",
+        lastname: "",
+        specializatio: "",
+        email: ""
+      })
+    };
+  },
+  methods: {
+    loadProfile() {
+      this.$Progress.start();
+      axios
+        .get("api/admin/profile")
+        .then(({ data }) => this.form.fill(data))
+        .catch(() => {
+          this.$Progress.fail();
+          this.$toast.error("Oops, something went wrong, fail to load profile");
+        });
+    },
+    //...
+    updateUser(id) {
+      this.$Progress.start();
+      this.form
+        .put("api/admin/profile" + this.form.id)
+        .then(() => {
+          this.$toast.success("Profile updated succesfully");
+          this.$Progress.finish;
+          this.form.reset();
+        })
+        .catch(() => {
+          this.$Progress.fail;
+          this.$toast.error("Oops, please field the form again");
+        });
+    }
+  },
+  created() {
+    this.loadProfile();
     console.log("Component mounted.");
   }
 };

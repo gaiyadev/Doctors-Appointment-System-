@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use\App\Admin;
 use\App\User;
+use\App\Appointment;
+use\App\complain;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -37,7 +39,7 @@ class AdminController extends Controller
     }
 //... fetch all appt
     public function allAppointment() {
-        return User::all();
+        return Appointment::all();
     }
     
     // public function index() {
@@ -104,5 +106,22 @@ class AdminController extends Controller
         return ['message' => 'Admin Deleted'];
 
     }
+
+    ///
+    
+      public function destroyA($id)
+    {
+        $Appointment =  Appointment::find($id);
+        $Appointment->delete();
+        return ['message' => 'Admin Deleted'];
+
+    }
+
+    public function complain() {
+        // $user = Auth::user()->id;
+        //return Complain::where('user_id', $user)->orderBy('id', 'asc')->paginate(4);
+        return Complain::all();
+    }
+
 
 }

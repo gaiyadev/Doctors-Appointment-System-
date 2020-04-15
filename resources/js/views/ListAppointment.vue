@@ -14,27 +14,34 @@
                 <table class="table">
                   <thead class="text-primary">
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>State</th>
-                    <th>City</th>
+                    <th>Email</th>
                     <th>Doctor</th>
+                    <th>Status</th>
+                    <th>Purpose</th>
+                    <th>Time</th>
                     <th>Booked_at</th>
                     <th>Actions</th>
                   </thead>
                   <tbody>
-                    <t v-for="appointment in appointments " :key="appointment.id">
-                      <td> {{ appointment.id}} </td>
-                      <td>   {{appointment.email }} </td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td class="text-primary">$36,738</td>
-                      <td class="text-primary">$36,738</td>
+                    <tr v-for="appointment in appointments " :key="appointment.id">
+                      <td>{{ appointment.id }}</td>
+                      <td>{{ appointment.email }}</td>
+                      <td>{{ appointment.doctor }}</td>
+                      <td>{{ appointment.status }}</td>
+                      <td>{{ appointment.purpose }}</td>
+                      <td>{{ appointment.created_at | date }}</td>
+                      <td>{{ appointment.time }}</td>
                       <td class="text-primary">
-                        <button type="button" class="btn btn-danger">
+                        <button
+                          @click="deleteAppointment(appointment.id)"
+                          type="button"
+                          class="btn btn-danger"
+                        >
                           <span class="material-icons">remove_circle</span>
                         </button>
                         <button type="button" class="btn btn-info">
                           <span class="material-icons">create</span>
+                          Approve
                         </button>
                       </td>
                     </tr>
@@ -79,9 +86,35 @@ export default {
             "Oops, something went wrong, fail to load appoimtments"
           );
         });
+    },
+    //..delete
+    deleteAppointment(id) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          this.$Progress.start();
+          this.form
+            .delete("api/appointment/" + id)
+            .then(() => {
+              this.$toast.success("Appointment Deleted succesfully");
+              this.$Progress.finish();
+            })
+            .catch(() => {});
+
+          this.$Progress.finish();
+          Fire.$emit("AfterDeleted");
+        }
+      });
     }
   },
-   mounted() {
+  mounted() {
     this.loadAppointment();
     // Fire.$on("AfterCreated", () => {
     //   this.loadAppointment(); to listen to component before updating
@@ -98,7 +131,6 @@ export default {
       this.loadAppointment();
     });
   }
-};
 };
 </script>
 

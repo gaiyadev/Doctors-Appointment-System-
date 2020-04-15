@@ -45,14 +45,18 @@ Route::get('api/appointment', 'AppointmentController@index');
 Route::delete('api/appointment/{id}', 'AppointmentController@destroy');
 Route::put('api/appointment/{id}', 'AppointmentController@update');
 
-//api calls for doctor(aadmin)
+//api calls for doctor(admin)
 Route::post('api/doctor', 'AdminController@store');
  Route::get('api/doctor', 'AdminController@fetch');
  Route::delete('api/doctor/{id}', 'AdminController@destroy');
 Route::put('api/doctor/{id}', 'AdminController@update');
+Route::get('api/complainlist', 'AdminController@complain');
+Route::get('api/admin/profile', 'AdminUpdateProfileController@show');
+
 
 //fetch from user table
 Route::get('api/user/all', 'AdminController@allAppointment');
+Route::delete('api/appointment/{id}', 'AdminController@destroyA');
 
 //..get use email
 //Route::get('api/userEmail', 'AppointmentController@getEmail');

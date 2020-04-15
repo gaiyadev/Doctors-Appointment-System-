@@ -5878,7 +5878,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
+  data: function data() {
+    return {
+      admins: {},
+      form: new Form({
+        id: "",
+        firstname: "",
+        lastname: "",
+        specializatio: "",
+        email: ""
+      })
+    };
+  },
+  methods: {
+    loadProfile: function loadProfile() {
+      var _this = this;
+
+      this.$Progress.start();
+      axios.get("api/admin/profile").then(function (_ref) {
+        var data = _ref.data;
+        return _this.form.fill(data);
+      })["catch"](function () {
+        _this.$Progress.fail();
+
+        _this.$toast.error("Oops, something went wrong, fail to load profile");
+      });
+    },
+    //...
+    updateUser: function updateUser(id) {
+      var _this2 = this;
+
+      this.$Progress.start();
+      this.form.put("api/admin/profile" + this.form.id).then(function () {
+        _this2.$toast.success("Profile updated succesfully");
+
+        _this2.$Progress.finish;
+
+        _this2.form.reset();
+      })["catch"](function () {
+        _this2.$Progress.fail;
+
+        _this2.$toast.error("Oops, please field the form again");
+      });
+    }
+  },
+  created: function created() {
+    this.loadProfile();
     console.log("Component mounted.");
   }
 });
@@ -6505,7 +6550,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      complains: {},
+      form: new Form({
+        id: "",
+        subject: "",
+        complain: ""
+      })
+    };
+  },
+  methods: {
+    loadComplain: function loadComplain() {
+      var _this = this;
+
+      this.$Progress.start();
+      axios.get("api/complainlist").then(function (_ref) {
+        var data = _ref.data;
+        return _this.complains = data;
+      })["catch"](function () {
+        _this.$Progress.fail();
+
+        Fire.$emit("AfterCreated"); // this.$toast.error(
+        //   "Oops, something went wrong, fail to load appoimtments"
+        // );
+      });
+    }
+  },
   mounted: function mounted() {
+    var _this2 = this;
+
+    this.loadComplain();
+    setInterval(function () {
+      _this2.loadComplain();
+    }, 1000);
     console.log("Component mounted.");
   }
 });
@@ -6637,9 +6715,147 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/ListAppointment.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\doctors\\resources\\js\\views\\ListAppointment.vue: Unexpected token (102:0)\n\n  100 |   }\n  101 | };\n> 102 | };\n      | ^\n  103 | \n    at Parser._raise (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:742:17)\n    at Parser.raiseWithData (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.raise (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:729:17)\n    at Parser.unexpected (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:8757:16)\n    at Parser.parseExprAtom (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:10052:20)\n    at Parser.parseExprSubscripts (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9602:23)\n    at Parser.parseMaybeUnary (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9582:21)\n    at Parser.parseExprOps (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9452:23)\n    at Parser.parseMaybeConditional (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9425:23)\n    at Parser.parseMaybeAssign (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9380:21)\n    at Parser.parseExpression (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:9332:23)\n    at Parser.parseStatementContent (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:11210:23)\n    at Parser.parseStatement (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:11081:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:11656:25)\n    at Parser.parseBlockBody (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:11642:10)\n    at Parser.parseTopLevel (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:11012:10)\n    at Parser.parse (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:12637:10)\n    at parse (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\parser\\lib\\index.js:12688:38)\n    at parser (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:93:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (C:\\xampp\\htdocs\\doctors\\node_modules\\@babel\\core\\lib\\transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (C:\\xampp\\htdocs\\doctors\\node_modules\\gensync\\index.js:254:32)\n    at C:\\xampp\\htdocs\\doctors\\node_modules\\gensync\\index.js:266:13\n    at async.call.result.err.err (C:\\xampp\\htdocs\\doctors\\node_modules\\gensync\\index.js:216:11)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      appointments: {},
+      form: new Form({
+        id: "",
+        email: "",
+        doctor: "",
+        date: "",
+        time: "",
+        status: "",
+        purpose: ""
+      })
+    };
+  },
+  methods: {
+    loadAppointment: function loadAppointment() {
+      var _this = this;
+
+      this.$Progress.start();
+      axios.get("api/user/all").then(function (_ref) {
+        var data = _ref.data;
+        return _this.appointments = data;
+      })["catch"](function () {
+        _this.$Progress.fail();
+
+        _this.$toast.error("Oops, something went wrong, fail to load appoimtments");
+      });
+    },
+    //..delete
+    deleteAppointment: function deleteAppointment(id) {
+      var _this2 = this;
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(function (result) {
+        if (result.value) {
+          _this2.$Progress.start();
+
+          _this2.form["delete"]("api/appointment/" + id).then(function () {
+            _this2.$toast.success("Appointment Deleted succesfully");
+
+            _this2.$Progress.finish();
+          })["catch"](function () {});
+
+          _this2.$Progress.finish();
+
+          Fire.$emit("AfterDeleted");
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this3 = this;
+
+    this.loadAppointment(); // Fire.$on("AfterCreated", () => {
+    //   this.loadAppointment(); to listen to component before updating
+    // });
+    //send request to the server every 5sec
+
+    setInterval(function () {
+      _this3.loadAppointment();
+    }, 1000);
+    Fire.$on("AfterDeleted", function () {
+      _this3.loadAppointment();
+    });
+    Fire.$on("AfterUpdated", function () {
+      _this3.loadAppointment();
+    });
+  }
+});
 
 /***/ }),
 
@@ -84773,126 +84989,124 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "form",
+      { staticClass: "form-horizontal", on: { click: _vm.updateUser } },
+      [_vm._m(0)]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c(
-        "form",
-        { staticClass: "form-horizontal", attrs: { autocomplete: "off" } },
-        [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header card-header-primary" }, [
-              _c("h4", { staticClass: "card-title" }, [_vm._v("Edit Profile")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("label", { staticClass: "col-sm-2 col-form-label" }, [
-                  _vm._v("FirstName")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-7" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        name: "name",
-                        id: "input-name",
-                        type: "text",
-                        placeholder: "FirstName",
-                        "aria-required": "true"
-                      }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("label", { staticClass: "col-sm-2 col-form-label" }, [
-                  _vm._v("LastName")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-7" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        name: "lastname",
-                        id: "Lastname",
-                        type: "text",
-                        placeholder: "LastName"
-                      }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "specialization" }
-                  },
-                  [_vm._v("Specialization")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-7" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        name: "specialization",
-                        placeholder: "Specialization",
-                        id: "specialization",
-                        type: "text"
-                      }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("label", { staticClass: "col-sm-2 col-form-label" }, [
-                  _vm._v("Email")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-7" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        name: "email",
-                        id: "input-email",
-                        type: "email",
-                        placeholder: "'Email"
-                      }
-                    })
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-footer ml-auto mr-auto" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary btn-lg btn-block",
-                  attrs: { type: "submit" }
-                },
-                [_vm._v("Save")]
-              )
+    return _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header card-header-primary" }, [
+        _c("h4", { staticClass: "card-title" }, [_vm._v("Edit Profile")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+            _vm._v("FirstName")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-7" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  name: "name",
+                  id: "input-name",
+                  type: "text",
+                  placeholder: "FirstName",
+                  "aria-required": "true"
+                }
+              })
             ])
           ])
-        ]
-      )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+            _vm._v("LastName")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-7" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  name: "lastname",
+                  id: "Lastname",
+                  type: "text",
+                  placeholder: "LastName"
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-sm-2 col-form-label",
+              attrs: { for: "specialization" }
+            },
+            [_vm._v("Specialization")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-7" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  name: "specialization",
+                  placeholder: "Specialization",
+                  id: "specialization",
+                  type: "text"
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+            _vm._v("Email")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-7" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  name: "email",
+                  id: "input-email",
+                  type: "email",
+                  placeholder: "'Email"
+                }
+              })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-footer ml-auto mr-auto" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-lg btn-block",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Save")]
+        )
+      ])
     ])
   }
 ]
@@ -85869,75 +86083,67 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.complains, function(complain) {
+                    return _c("tr", { key: complain.id }, [
+                      _c("td", [_vm._v(_vm._s(complain.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(complain.subject))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(complain.complain))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(complain.created_at))])
+                    ])
+                  }),
+                  0
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header card-header-primary" }, [
-              _c("h4", { staticClass: "card-title text-uppercase" }, [
-                _vm._v("Complain Made")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-category" }, [
-                _vm._v("Here is a list of Doctors on seat")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "table-responsive" }, [
-                _c("table", { staticClass: "table" }, [
-                  _c("thead", { staticClass: "text-primary" }, [
-                    _c("th", [_vm._v("ID")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("FirstName")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("LastName")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Email")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("State")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Complain")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Booked_at")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("td", [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Dakota Rice")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Niger")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Oud-Turnhout")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
+    return _c("div", { staticClass: "card-header card-header-primary" }, [
+      _c("h4", { staticClass: "card-title text-uppercase" }, [
+        _vm._v("Complain Made")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-category" }, [
+        _vm._v("Here is a list of Doctors on seat")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "text-primary" }, [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("SUbject")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Complain")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Booked_at")])
     ])
   }
 ]
@@ -86247,8 +86453,128 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
-var staticRenderFns = []
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content" }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("table", { staticClass: "table" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.appointments, function(appointment) {
+                      return _c("tr", { key: appointment.id }, [
+                        _c("td", [_vm._v(_vm._s(appointment.id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(appointment.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(appointment.doctor))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(appointment.status))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(appointment.purpose))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(_vm._f("date")(appointment.created_at)))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(appointment.time))]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-primary" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteAppointment(appointment.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { staticClass: "material-icons" }, [
+                                _vm._v("remove_circle")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._m(2, true)
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header card-header-primary" }, [
+      _c("h4", { staticClass: "card-title text-uppercase" }, [
+        _vm._v("Appointment Table")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-category" }, [
+        _vm._v("Here is a list of your table")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "text-primary" }, [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Doctor")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Status")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Purpose")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Time")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Booked_at")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Actions")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-info", attrs: { type: "button" } },
+      [
+        _c("span", { staticClass: "material-icons" }, [_vm._v("create")]),
+        _vm._v("\n                        Approve\n                      ")
+      ]
+    )
+  }
+]
+render._withStripped = true
 
 
 
