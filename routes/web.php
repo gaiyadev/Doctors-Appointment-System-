@@ -45,8 +45,14 @@ Route::get('api/appointment', 'AppointmentController@index');
 Route::delete('api/appointment/{id}', 'AppointmentController@destroy');
 Route::put('api/appointment/{id}', 'AppointmentController@update');
 
+//api calls for doctor(aadmin)
+Route::post('api/doctor', 'AppointmentController@store');
+Route::get('api/doctor', 'AppointmentController@index');
+Route::delete('api/doctor/{id}', 'AppointmentController@destroy');
+Route::put('api/doctor/{id}', 'AppointmentController@update');
+
 //..get use email
-Route::get('api/userEmail', 'AppointmentController@getEmail');
+//Route::get('api/userEmail', 'AppointmentController@getEmail');
 
 //complain
 Route::post('api/complain', 'ComplainController@store');

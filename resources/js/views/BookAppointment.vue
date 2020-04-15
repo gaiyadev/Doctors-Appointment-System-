@@ -244,9 +244,9 @@ export default {
         .then(({ data }) => (this.appointments = data.data))
         .catch(() => {
           this.$Progress.fail();
-          this.$toast.error(
-            "Oops, something went wrong, fail to load appoimtments"
-          );
+          // this.$toast.error(
+          //   "Oops, something went wrong, fail to load appoimtments"
+          // );
         });
     },
     deleteAppointment(id) {

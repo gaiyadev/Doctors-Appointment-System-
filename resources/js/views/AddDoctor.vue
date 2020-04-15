@@ -11,13 +11,7 @@
             <div class="card-body">
               <div class="table-responsive">
                 <!-- Button trigger modal -->
-
-                <button
-                  type="button"
-                  data-toggle="modal"
-                  data-target="#bookModal"
-                  class="btn btn-primary"
-                >
+                <button type="button" @click="newModal" class="btn btn-primary">
                   <span class="material-icons">add_circle</span>
                 </button>
                 <table class="table">
@@ -41,11 +35,15 @@
                       <td class="text-primary">$36,738</td>
                       <td class="text-primary">$36,738</td>
                       <td class="text-primary">
-                        <button type="button" class="btn btn-danger">
-                          <span class="material-icons">remove_circle</span>
-                        </button>
-                        <button type="button" class="btn btn-info">
+                        <button @click="editModal(doctor)" type="button" class="btn btn-info">
                           <span class="material-icons">create</span>
+                        </button>
+                        <button
+                          @click="deleteDoctor(doctor.id)"
+                          type="button"
+                          class="btn btn-danger"
+                        >
+                          <span class="material-icons">remove_circle</span>
                         </button>
                       </td>
                     </tr>
@@ -72,43 +70,85 @@
           <div class="modal-header"></div>
           <div class="modal-body">
             <div class="card card-nav-tabs">
-              <div class="card-header card-header-primary text-uppercase">Add Doctor</div>
+              <div v-show="editMode" class="card-header card-header-primary">Update Doctor</div>
+              <div v-show="!editMode" class="card-header card-header-primary">Add Doctor</div>
               <div class="card-body">
-                <form>
+                <form @submit.prevent=" editMode ? updateDoctor()  : createDoctor () ">
                   <div class="form-group">
                     <label for="firstname" class="text-primary">FirstName</label>
-                    <input type="text" class="form-control" id="firstname" name="FirstName" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="form.firstname"
+                      :class="{ 'is-invalid': form.errors.has('firstname') }"
+                      id="firstname"
+                      name="firstname"
+                    />
+                    <has-error :form="form" field="firstname"></has-error>
                   </div>
                   <div class="form-group">
                     <label for="lastname" class="text-primary">LastName</label>
-                    <input type="text" class="form-control" id="lastname" name="LastName" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('lastname') }"
+                      id="lastname"
+                      v-model="form.lastname"
+                      name="lastname"
+                    />
+                    <has-error :form="form" field="lastName"></has-error>
                   </div>
                   <div class="form-group">
                     <label for="email" class="text-primary">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" />
+                    <input
+                      type="email"
+                      class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('email') }"
+                      id="email"
+                      v-model="form.email"
+                      name="email"
+                    />
+                    <has-error :form="form" field="email"></has-error>
                   </div>
                   <div class="form-group">
                     <label for="state" class="text-primary">State</label>
                     <select
                       name="state"
+                      v-model="form.state"
                       class="form-control selectpicker"
+                      :class="{ 'is-invalid': form.errors.has('state') }"
                       data-style="btn btn-link"
                       id="state"
                     >
-                      <option>1</option>
-                      <option>2</option>
+                      <option>Kaduna</option>
+                      <option>Kano</option>
+                      <option>Lago</option>
+                      <option>Abuja</option>
+                      <option>Yobe</option>
+                      <option>Kebbi</option>
                     </select>
+                    <has-error :form="form" field="state"></has-error>
                   </div>
                   <div class="form-group">
-                    <label for="specialization" class="text-primary">Specailizastion</label>
+                    <label for="specialization" class="text-primary">Specailization</label>
                     <input
                       type="Text"
                       class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('specialization') }"
                       id="specialization"
                       name="specialization"
+                      v-model="form.specialization"
                     />
+                    <has-error :form="form" field="specialization"></has-error>
                   </div>
                   <button
+                    v-show="editMode"
+                    type="submit"
+                    name="submit"
+                    class="btn btn-primary btn-lg btn-block"
+                  >UPDATE DOCTOR</button>
+                  <button
+                    v-show="!editMode"
                     type="submit"
                     name="submit"
                     class="btn btn-primary btn-lg btn-block"
@@ -126,3 +166,139 @@
     </div>
   </div>
 </template>
+
+
+
+
+
+<script>
+export default {
+  data() {
+    return {
+      editMode: false,
+      doctors: {},
+      form: new Form({
+        id: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        state: "",
+        specialization: "",
+        status: ""
+      })
+    };
+  },
+
+  methods: {
+    updateDoctor() {
+      this.$Progress.start();
+      this.form
+        .put("api/doctor/" + this.form.id)
+        .then(() => {
+          this.$Progress.finish();
+          this.$toast.success("Doctor updated succesfully");
+          $("#bookModal").modal("hide");
+          Fire.$emit("AfterUpdated");
+        })
+        .catch(() => {
+          this.$Progress.fail();
+          this.$toast.error("Oops, please field the form again");
+        });
+    },
+    //edit modal
+    editModal(doctor) {
+      this.editMode = true;
+      this.form.reset();
+      $("#bookModal").modal("show");
+      this.form.fill(doctor);
+    },
+    // add modal
+    newModal() {
+      this.editMode = false;
+      this.form.reset();
+      $("#bookModal").modal("show");
+    },
+    createDoctor() {
+      this.$Progress.start();
+      this.form
+        .post("api/doctor")
+        .then(() => {
+          this.$Progress.finish;
+          this.$toast.success("Doctor booked succesfully");
+          $("#bookModal").modal("hide");
+          this.form.reset();
+        })
+        .catch(() => {
+          this.$Progress.fail;
+          this.$toast.error("Oops, please field the form again");
+        });
+      // this.form.reset();
+
+      // Fire.$emit("AfterCreated");
+    },
+    loadDoctor() {
+      axios
+        .get("api/doctor")
+        .then(({ data }) => (this.doctors = data.data))
+        .catch(() => {
+          this.$Progress.fail();
+          this.$toast.error(
+            "Oops, something went wrong, fail to load appoimtments"
+          );
+        });
+    },
+    deleteDoctor(id) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          this.$Progress.start();
+          this.form
+            .delete("api/doctor/" + id)
+            .then(() => {
+              // Swal.fire(
+              //   "Deleted!",
+              //   "Your appointment has been deleted.",
+              //   "success"
+              // );
+              this.$toast.success("Doctor Deleted succesfully");
+              this.$Progress.finish();
+            })
+            .catch(() => {
+              this.$toast.error(
+                "Oops, something went wrong, fail to delete appoimtments"
+              );
+            });
+
+          this.$Progress.finish();
+          Fire.$emit("AfterDeleted");
+        }
+      });
+    }
+  },
+
+  mounted() {
+    this.loadDoctor();
+    // Fire.$on("AfterCreated", () => {
+    //   this.loadAppointment(); to listen to component before updating
+    // });
+    //send request to the server every 5sec
+    setInterval(() => {
+      this.loadAppointment();
+    }, 1000);
+
+    Fire.$on("AfterDeleted", () => {
+      this.loadDoctort();
+    });
+    Fire.$on("AfterUpdated", () => {
+      this.loadDoctor();
+    });
+  }
+};
+</script>
