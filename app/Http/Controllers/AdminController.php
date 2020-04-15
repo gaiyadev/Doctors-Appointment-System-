@@ -92,7 +92,8 @@ class AdminController extends Controller
        $Admin->email = $request->input('email');
        $Admin->state = $request->input('state');
        $Admin->specialization = $request->input('specialization');      
-       $Admin->user_id = auth()->user()->id;
+       $Admin->password = $request->input('password');      
+      // $Admin->user_id = auth()->user()->id;
        $Admin->save();
         return ['message' => 'Admin updated'];
     }

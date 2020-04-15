@@ -12,31 +12,38 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUpdateProfileController extends Controller
 {
+
+     public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
      //
     public function show() {
-        return  Auth::user();
+        $user = Auth::getUser('admin');
+        return  $user;
 
     }
 
      // Saving to database
     public function updateInfo(Request $request, $id) {
-        $user = Admin::find($id);
+         $user = Admin::find($id);
          $request->validate([
-             'name' => 'required|min:3|max:50',            
+             'firstname' => 'required|min:3|max:50',            
             'lastname' => 'required|min:3|max:55',
-            'dob' => 'required',
+            'specialization' => 'required',
             'email' => 'required|max:191|email|unique:users,email,' . $user->id,
             
             
 ]);
 
           //saving to db
-      $Admin =  Admin::find($id);
-       $User->name = $request->input('name');
-       $User->lastname = $request->input('lastname');
-       $User->dob = $request->input('dob');
-       $User->email = $request->input('email');
-       $User->save();
+       $Admin =  Admin::find($id);
+       $Admin->firstname = $request->input('firstname');
+       $Admin->lastname = $request->input('lastname');
+       $Admin->specialization = $request->input('specialization');
+       $Admin->email = $request->input('email');
+       $Admin->save();
 
         return ['message' => 'user info updated'];
 

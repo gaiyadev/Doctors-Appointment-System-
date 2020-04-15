@@ -157,15 +157,18 @@
                     <has-error :form="form" field="state"></has-error>
                   </div>
                   <div class="form-group">
-                    <label for="specialization" class="text-primary">Specailization</label>
-                    <input
-                      type="Text"
-                      class="form-control"
-                      :class="{ 'is-invalid': form.errors.has('specialization') }"
-                      id="specialization"
+                    <label for="specialization" class="text-primary">User Type</label>
+                    <select
                       name="specialization"
                       v-model="form.specialization"
-                    />
+                      class="form-control selectpicker"
+                      :class="{ 'is-invalid': form.errors.has('specialization') }"
+                      data-style="btn btn-link"
+                      id="specialization"
+                    >
+                      <option>Admin</option>
+                      <option>Doctor</option>
+                    </select>
                     <has-error :form="form" field="specialization"></has-error>
                   </div>
                   <button
@@ -271,9 +274,9 @@ export default {
         .then(({ data }) => (this.doctors = data))
         .catch(() => {
           this.$Progress.fail();
-          this.$toast.error(
-            "Oops, something went wrong, fail to load appoimtments"
-          );
+          // this.$toast.error(
+          //   "Oops, something went wrong, fail to load appoimtments"
+          // );
         });
     },
     //..delete

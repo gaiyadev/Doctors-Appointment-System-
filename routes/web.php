@@ -51,7 +51,8 @@ Route::post('api/doctor', 'AdminController@store');
  Route::delete('api/doctor/{id}', 'AdminController@destroy');
 Route::put('api/doctor/{id}', 'AdminController@update');
 Route::get('api/complainlist', 'AdminController@complain');
-Route::get('api/admin/profile', 'AdminUpdateProfileController@show');
+Route::get('api/admin', 'AdminUpdateProfileController@show');
+Route::put('api/admin/{id}', 'AdminUpdateProfileController@updateInfo');
 
 
 //fetch from user table

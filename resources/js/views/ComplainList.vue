@@ -23,9 +23,9 @@
                   <tr v-for="complain in complains" :key="complain.id">
                     <td>{{ complain.id }}</td>
                     <td>{{complain.subject }}</td>
-                    <td>{{complain.complain}}</td>
+                    <td>{{complain.complain }}</td>
                     <!-- <td>{{ complain.user_id }}</td> -->
-                    <td>{{ complain.created_at }}</td>
+                    <td>{{ complain.created_at | date }}</td>
                     <!-- <td class="text-primary">$36,738</td>
                     <td class="text-primary">$36,738</td>-->
                   </tr>
