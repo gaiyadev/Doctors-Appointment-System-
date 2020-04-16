@@ -62,6 +62,9 @@ Route::put('api/time/{id}', 'TimeController@update');
 //doctor on set
 Route::get('api/getactive', 'AdminController@seat');
 
+//aprove appointment
+Route::post('api/approve/{id}', 'ApprovedController@approve');
+
 
 
 //fetch from user table

@@ -53,7 +53,7 @@ class AdminController extends Controller
     // }
 
 
-      // Saving to database
+      // creating new users Saving to database
     public function store(Request $request) {        
     //       //creating/saving users to db
     $this->validation($request);
@@ -64,7 +64,7 @@ class AdminController extends Controller
     }
     public function validation ($request) {
      return $request->validate([
-             'firstname' => 'required|min:3|max:50',            
+            'firstname' => 'required|min:3|max:50',            
             'lastname' => 'required|max:255',
             'email' => 'required|email|unique:admins|max:255',
             'state' => 'required',
@@ -86,7 +86,7 @@ class AdminController extends Controller
             'email' => 'required|max:191|email|unique:users,email,' . $user->id,
             'state' => 'required',
             'specialization' => 'required|min:3|max:255',
-             'password' => ['required', 'min:8', 'same:password'],
+            'password' => ['required', 'min:8', 'same:password'],
             'confirmed_password' => ['required', 'min:8', 'same:password'], 
             ]);
 

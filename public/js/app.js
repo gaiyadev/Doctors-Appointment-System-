@@ -7169,10 +7169,26 @@ __webpack_require__.r(__webpack_exports__);
           Fire.$emit("AfterDeleted");
         }
       });
+    },
+    approve: function approve(id) {
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.form.post("api/approve/" + id).then(function () {
+        _this3.$Progress.finish();
+
+        _this3.$toast.success("Appointment updated succesfully");
+
+        Fire.$emit("AfterUpdated");
+      })["catch"](function () {
+        _this3.$Progress.fail();
+
+        _this3.$toast.error("Oops, please field the form again");
+      });
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.loadAppointment(); // Fire.$on("AfterCreated", () => {
     //   this.loadAppointment(); to listen to component before updating
@@ -7180,13 +7196,13 @@ __webpack_require__.r(__webpack_exports__);
     //send request to the server every 5sec
 
     setInterval(function () {
-      _this3.loadAppointment();
+      _this4.loadAppointment();
     }, 1000);
     Fire.$on("AfterDeleted", function () {
-      _this3.loadAppointment();
+      _this4.loadAppointment();
     });
     Fire.$on("AfterUpdated", function () {
-      _this3.loadAppointment();
+      _this4.loadAppointment();
     });
   }
 });
@@ -87243,7 +87259,26 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _vm._m(2, true)
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.approve(appointment.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { staticClass: "material-icons" }, [
+                                _vm._v("create")
+                              ]),
+                              _vm._v(
+                                "\n                        Approve\n                      "
+                              )
+                            ]
+                          )
                         ])
                       ])
                     }),
@@ -87294,19 +87329,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Actions")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-info", attrs: { type: "button" } },
-      [
-        _c("span", { staticClass: "material-icons" }, [_vm._v("create")]),
-        _vm._v("\n                        Approve\n                      ")
-      ]
-    )
   }
 ]
 render._withStripped = true

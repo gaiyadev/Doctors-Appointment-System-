@@ -16,6 +16,10 @@ class Appointment extends Model
         'doctor', 'email', 'purpose', 'date', 'time',
     ];
 
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     public function user () {
     	return $this->belongsTo('App\User');
     }

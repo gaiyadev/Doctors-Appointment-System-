@@ -39,7 +39,7 @@
                         >
                           <span class="material-icons">remove_circle</span>
                         </button>
-                        <button type="button" class="btn btn-info">
+                        <button @click="approve(appointment.id)" type="button" class="btn btn-info">
                           <span class="material-icons">create</span>
                           Approve
                         </button>
@@ -112,6 +112,20 @@ export default {
           Fire.$emit("AfterDeleted");
         }
       });
+    },
+    approve(id) {
+      this.$Progress.start();
+      this.form
+        .post("api/approve/" + id)
+        .then(() => {
+          this.$Progress.finish();
+          this.$toast.success("Appointment updated succesfully");
+          Fire.$emit("AfterUpdated");
+        })
+        .catch(() => {
+          this.$Progress.fail();
+          this.$toast.error("Oops, please field the form again");
+        });
     }
   },
   mounted() {
