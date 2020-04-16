@@ -23,12 +23,12 @@
               <th>Actions</th>
             </thead>
             <tbody>
-              <tr v-for="complain in complains" :key="complain.id">
-                <td>{{ complain.id }}</td>
-                <td>{{ complain.email }}</td>
-                <td>{{ complain.subject | uppercase }}</td>
-                <td>{{ complain.complain | date }}</td>
-                <td>{{ complain.created_at | date }}</td>
+              <tr v-for="Complain in complains" :key="Complain.id">
+                <td>{{ Complain.id }}</td>
+                <td>{{ Complain.email }}</td>
+                <td>{{ Complain.subject | uppercase }}</td>
+                <td>{{ Complain.complain }}</td>
+                <td>{{ Complain.created_at | date }}</td>
                 <td class="text-primary">
                   <button @click="deleteComplain(complain.id)" type="button" class="btn btn-danger">
                     <span class="material-icons">remove_circle</span>

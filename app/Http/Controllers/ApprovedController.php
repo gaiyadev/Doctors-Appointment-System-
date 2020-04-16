@@ -12,20 +12,20 @@ class ApprovedController extends Controller
     {
         $this->middleware('auth:admin');
     }
-    //
+    //|| $approveValue == 0
     public function approve(Request $request, $id) {
        $appointment = Appointment::find($id);
-     $approveValue = $request->status;
-        if ($approveValue === 'on') {
+       $approveValue = $request->status;
+       
+        if ($approveValue === null ) {
             $approveValue = 1;
-        } else if ($approveValue === 'off'){
-            $approveValue = 0;
+        } else if ($approveValue === 0){
+            $approveValue = 1;
         }else {
             
         }
-        return dd($appointment->status); die;
       $appointment->status = $approveValue;
         $appointment->save();
-//return 'approve';
+        return 'approve';
     }
 }

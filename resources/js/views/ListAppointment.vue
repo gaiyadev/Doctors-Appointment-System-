@@ -27,7 +27,7 @@
                       <td>{{ appointment.id }}</td>
                       <td>{{ appointment.email }}</td>
                       <td>{{ appointment.doctor }}</td>
-                      <td>{{ appointment.status }}</td>
+                      <td>{{ appointment.status ? 'Approved' : 'Not Approved'}}</td>
                       <td>{{ appointment.purpose }}</td>
                       <td>{{ appointment.created_at | date }}</td>
                       <td>{{ appointment.time }}</td>

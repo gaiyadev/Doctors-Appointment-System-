@@ -85932,7 +85932,13 @@ var render = function() {
                           _vm._v(_vm._s(_vm._f("date")(appointment.created_at)))
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(appointment.status))]),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              appointment.status ? "Approved" : "Not Approved"
+                            )
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "text-primary" }, [
                           _c(
@@ -86517,20 +86523,20 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.complains, function(complain) {
-                return _c("tr", { key: complain.id }, [
-                  _c("td", [_vm._v(_vm._s(complain.id))]),
+              _vm._l(_vm.complains, function(Complain) {
+                return _c("tr", { key: Complain.id }, [
+                  _c("td", [_vm._v(_vm._s(Complain.id))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(complain.email))]),
+                  _c("td", [_vm._v(_vm._s(Complain.email))]),
                   _vm._v(" "),
                   _c("td", [
-                    _vm._v(_vm._s(_vm._f("uppercase")(complain.subject)))
+                    _vm._v(_vm._s(_vm._f("uppercase")(Complain.subject)))
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm._f("date")(complain.complain)))]),
+                  _c("td", [_vm._v(_vm._s(Complain.complain))]),
                   _vm._v(" "),
                   _c("td", [
-                    _vm._v(_vm._s(_vm._f("date")(complain.created_at)))
+                    _vm._v(_vm._s(_vm._f("date")(Complain.created_at)))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-primary" }, [
@@ -86541,7 +86547,7 @@ var render = function() {
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
-                            return _vm.deleteComplain(complain.id)
+                            return _vm.deleteComplain(_vm.complain.id)
                           }
                         }
                       },
@@ -87230,7 +87236,13 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(appointment.doctor))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(appointment.status))]),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              appointment.status ? "Approved" : "Not Approved"
+                            )
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(appointment.purpose))]),
                         _vm._v(" "),
