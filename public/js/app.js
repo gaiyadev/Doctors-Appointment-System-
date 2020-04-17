@@ -87474,23 +87474,25 @@ var render = function() {
               _c("table", { staticClass: "table" }, [
                 _vm._m(1),
                 _vm._v(" "),
-                _c("tbody", [
-                  _vm.list in _vm.lists
-                    ? _c("tr", { key: _vm.list.id }, [
-                        _c("td", [_vm._v(_vm._s(_vm.list.id))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.list.firstname))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.list.lastname))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.list.email))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.list.state))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.list.specialization))])
-                      ])
-                    : _vm._e()
-                ])
+                _c(
+                  "tbody",
+                  _vm._l(_vm.lists, function(list) {
+                    return _c("tr", { key: list.id }, [
+                      _c("td", [_vm._v(_vm._s(list.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(list.firstname))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(list.lastname))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(list.email))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(list.state))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(list.specialization))])
+                    ])
+                  }),
+                  0
+                )
               ])
             ])
           ])

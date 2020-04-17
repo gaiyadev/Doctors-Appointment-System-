@@ -19,7 +19,7 @@
                   <th>Specialization</th>
                 </thead>
                 <tbody>
-                  <tr v-if="list in lists" :key="list.id">
+                  <tr v-for="list in lists" :key="list.id">
                     <td>{{ list.id }}</td>
                     <td>{{ list.firstname }}</td>
                     <td>{{ list.lastname }}</td>

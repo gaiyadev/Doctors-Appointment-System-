@@ -41,7 +41,8 @@ class AdminController extends Controller
 //... fetch all appt
     public function allAppointment() {
         return Appointment::all();
-       // return Appointment::orderBy('email', 'asc')->paginate(6);
+             $user = Auth::user()->id;
+       return Appointment::where('user_id', $user)->orderBy('id', 'asc')->paginate(4);
 
     }
 
