@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'AdminController@index')->name('admin.home');
 Route::get('admin', 'Admin\LoginController@showLoginForm')->name('Admin.show');
 Route::POST('slogin', 'Admin\LoginController@login')->name('admin.login');
-
+Route::POST('adminLogout', 'Admin\LoginController@logout')->name('admin.logout');
 //done
 Route::POST('admin-password/email', 'Admin\ResetPasswordController@sendRequestLinkEmail')->name('admin.password.email');
 
