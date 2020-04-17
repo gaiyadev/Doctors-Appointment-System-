@@ -326,6 +326,18 @@ export default {
     Fire.$on("AfterUpdated", () => {
       this.loadAppointment();
     });
+
+    let query = this.$parent.search;
+    Fire.$on("searching", () => {
+      axios
+        .get("api/findAppointment?q=" + query)
+        .then(data => {
+          this.appointments = data.data;
+        })
+        .catch(() => {
+          console.log("not working");
+        });
+    });
   }
 };
 </script>

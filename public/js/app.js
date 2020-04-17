@@ -6595,6 +6595,14 @@ __webpack_require__.r(__webpack_exports__);
     Fire.$on("AfterUpdated", function () {
       _this6.loadAppointment();
     });
+    var query = this.$parent.search;
+    Fire.$on("searching", function () {
+      axios.get("api/findAppointment?q=" + query).then(function (data) {
+        _this6.appointments = data.data;
+      })["catch"](function () {
+        console.log("not working");
+      });
+    });
   }
 });
 
@@ -105528,7 +105536,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('uppercase', function (text) {
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('date', function name(created) {
   return moment__WEBPACK_IMPORTED_MODULE_8___default()(created).format('MMMM DD YYYY');
 });
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js")); // const files = require.context('./', true, /\.vue$/i)
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js")); // const files =  require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
@@ -105540,7 +105548,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webp
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_1__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_1__["default"],
+  data: {
+    search: ''
+  },
+  methods: {
+    searchit: function searchit() {
+      Fire.$emit('searching');
+    }
+  }
 });
 
 /***/ }),

@@ -86,6 +86,9 @@ Route::post('api/change', 'UserChangePasswordController@changePassword');
 Route::get('api/profile', 'UserUpdateProfileController@show');
 Route::put('api/user/{id}', 'UserUpdateProfileController@updateInfo');
 
+//search functionalilty
+Route::get('api/findAppointment', 'SearchController@search');
+
 
 
 

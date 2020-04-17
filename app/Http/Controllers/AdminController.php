@@ -121,6 +121,7 @@ class AdminController extends Controller
     
       public function destroyA($id)
     {
+              //  $this.authorize('isAdmin');
         $Appointment =  Appointment::find($id);
         $Appointment->delete();
         return ['message' => 'Admin Deleted'];
