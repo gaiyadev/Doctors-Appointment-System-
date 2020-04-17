@@ -28,7 +28,7 @@
                     <th>Actions</th>
                   </thead>
                   <tbody>
-                    <tr v-for="appointment in appointments" :key="appointment.id">
+                    <tr v-for="appointment in appointments.data" :key="appointment.id">
                       <td>{{ appointment.id }}</td>
                       <td>{{ appointment.email }}</td>
                       <td>{{ appointment.doctor | uppercase }}</td>
@@ -53,6 +53,13 @@
                   </tbody>
                 </table>
               </div>
+            </div>
+            <div class="card-footer">
+              <pagination :data="appointments" @pagination-change-page="getResults">
+                <span slot="prev-nav">&lt; Previous</span>
+                <span slot="next-nav">Next &gt;</span>
+              </pagination>
+              <!-- <pagination :data="appointments" @pagination-change-page="getResults"></pagination> -->
             </div>
           </div>
         </div>
@@ -248,7 +255,7 @@ export default {
     loadAppointment() {
       axios
         .get("api/appointment")
-        .then(({ data }) => (this.appointments = data.data))
+        .then(({ data }) => (this.appointments = data))
         .catch(() => {
           this.$Progress.fail();
           // this.$toast.error(
@@ -289,18 +296,29 @@ export default {
           Fire.$emit("AfterDeleted");
         }
       });
+    },
+
+    getResults(page = 1) {
+      axios
+        .get("api/appointment?page=" + page)
+        .then(response => {
+          this.appointments = response.data;
+        })
+        .catch();
     }
   },
 
   mounted() {
     this.loadAppointment();
+    this.getResults();
+
     // Fire.$on("AfterCreated", () => {
     //   this.loadAppointment(); to listen to component before updating
     // });
     //send request to the server every 5sec
     setInterval(() => {
       this.loadAppointment();
-    }, 1000);
+    }, 20000);
 
     Fire.$on("AfterDeleted", () => {
       this.loadAppointment();

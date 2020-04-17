@@ -23,7 +23,7 @@
               <th>Actions</th>
             </thead>
             <tbody>
-              <tr v-for="Complain in complains" :key="Complain.id">
+              <tr v-for="Complain in complains.data" :key="Complain.id">
                 <td>{{ Complain.id }}</td>
                 <td>{{ Complain.email }}</td>
                 <td>{{ Complain.subject | uppercase }}</td>
@@ -38,6 +38,13 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="card-footer">
+        <pagination :data="complains" @pagination-change-page="getResults">
+          <span slot="prev-nav">&lt; Previous</span>
+          <span slot="next-nav">Next &gt;</span>
+        </pagination>
+        <!-- <pagination :data="appointments" @pagination-change-page="getResults"></pagination> -->
       </div>
     </div>
 
@@ -141,7 +148,7 @@ export default {
       this.$Progress.start();
       axios
         .get("api/complain")
-        .then(({ data }) => (this.complains = data.data))
+        .then(({ data }) => (this.complains = data))
         .catch(() => {
           this.$Progress.fail();
           Fire.$emit("AfterCreated");
@@ -177,11 +184,20 @@ export default {
           Fire.$emit("AfterDeleted");
         }
       });
+    },
+    getResults(page = 1) {
+      axios
+        .get("api/complain?page=" + page)
+        .then(response => {
+          this.appointments = response.data;
+        })
+        .catch();
     }
   },
 
   mounted() {
     this.loadComplain();
+    //this.getResults();
     Fire.$on("AfterCreated", () => {
       this.loadComplain(); //to listen to component before updating
     });

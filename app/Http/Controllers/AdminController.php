@@ -41,9 +41,9 @@ class AdminController extends Controller
     }
 //... fetch all appt
     public function allAppointment() {
-        return Appointment::all();
-             $user = Auth::user()->id;
-       return Appointment::where('user_id', $user)->orderBy('id', 'asc')->paginate(4);
+       return Appointment::paginate(5);
+            // $user = Auth::user()->id;
+      // return Appointment::where('user_id', $user)->orderBy('id', 'asc')->paginate(4);
 
     }
 
@@ -130,7 +130,7 @@ class AdminController extends Controller
     public function complain() {
         // $user = Auth::user()->id;
         //return Complain::where('user_id', $user)->orderBy('id', 'asc')->paginate(4);
-        return Complain::all();
+        return Complain::paginate(6);
     }
 
 

@@ -70,7 +70,7 @@ Vue.filter('uppercase', function (text) {
 Vue.filter('date', function name(created) {
     return moment(created).format('MMMM DD YYYY');
 });
-
+Vue.component('pagination', require('laravel-vue-pagination'));
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 

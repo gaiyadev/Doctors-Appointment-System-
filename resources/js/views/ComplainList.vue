@@ -20,7 +20,7 @@
                   <th>Booked_at</th>
                 </thead>
                 <tbody>
-                  <tr v-for="complain in complains" :key="complain.id">
+                  <tr v-for="complain in complains.data" :key="complain.id">
                     <td>{{ complain.id }}</td>
                     <td>{{complain.subject }}</td>
                     <td>{{complain.complain }}</td>
@@ -32,6 +32,13 @@
                 </tbody>
               </table>
             </div>
+          </div>
+          <div class="card-footer">
+            <pagination :data="complains" @pagination-change-page="getResults">
+              <span slot="prev-nav">&lt; Previous</span>
+              <span slot="next-nav">Next &gt;</span>
+            </pagination>
+            <!-- <pagination :data="appointments" @pagination-change-page="getResults"></pagination> -->
           </div>
         </div>
       </div>
@@ -64,13 +71,22 @@ export default {
           //   "Oops, something went wrong, fail to load appoimtments"
           // );
         });
+    },
+    getResults(page = 1) {
+      axios
+        .get("api/complainlist?page=" + page)
+        .then(response => {
+          this.appointments = response.data;
+        })
+        .catch();
     }
   },
   mounted() {
     this.loadComplain();
+    this.getResults();
     setInterval(() => {
       this.loadComplain();
-    }, 1000);
+    }, 8000);
     console.log("Component mounted.");
   }
 };
