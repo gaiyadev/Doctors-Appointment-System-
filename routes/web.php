@@ -60,7 +60,7 @@ Route::delete('api/time/{id}', 'TimeController@destroy');
 Route::put('api/time/{id}', 'TimeController@update');
 
 //doctor on set
-Route::get('api/getactive', 'AdminController@seat');
+Route::get('api/getactive', 'AppointmentController@seat');
 
 //aprove appointment
 Route::post('api/approve/{id}', 'ApprovedController@approve');

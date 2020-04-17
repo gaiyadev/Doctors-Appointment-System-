@@ -11,6 +11,12 @@ use App\User;
 class ComplainController extends Controller
 {
 
+     public function __construct()
+    {
+        $this->middleware('auth');
+        
+    }
+
     public function index() {
          $user = Auth::user()->id;
         return Complain::where('user_id', $user)->orderBy('id', 'asc')->paginate(4);

@@ -10,6 +10,11 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class UserUpdateProfileController extends Controller
 {
+
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     public function show() {
         return  Auth::user();

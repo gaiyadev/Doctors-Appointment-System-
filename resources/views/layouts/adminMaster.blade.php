@@ -42,15 +42,29 @@
       <div class="content" >
         <div class="container-fluid">  
         <h4 class="text-primary">Welcome {{ Auth::user()->firstname }}  </h4>    
-     <transition>
+     <transition name="fade" mode="out-in" >
       <router-view></router-view>
-       </transition>
+      </transition>
    
       </div>
       
     </div>
   </div>
     </div>
+    <style>
+    .fade-enter,  .fade-leave-active {
+      opacity: 0;
+      
+    }
+    .fade-enter-active, .fade-leave-active {
+      transiton-duration: 0.3s;
+      transiton-property: opacity;
+      transition-timing-function: ease;
+    }
+   
+  
+    
+    </style>
   <footer class="footer">
         <div class="container-fluid">
           <div class="copyright float-right">

@@ -7,6 +7,7 @@ use\App\Appointment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
+use App\Admin;
 
 
 
@@ -16,6 +17,11 @@ class AppointmentController extends Controller
     {
         $this->middleware('auth');
     }
+
+     public function seat() {
+        return Admin::all();
+    }
+    
 
     public function index() {
     $user = Auth::user()->id;
