@@ -16,18 +16,14 @@
                   <th>LastName</th>
                   <th>State</th>
                   <th>Specailizastion</th>
-                  <th>Date</th>
-                  <th>Time</th>
                 </thead>
                 <tbody>
                   <tr v-for="list in lists" :key="list.id">
                     <td>{{ list.id }}</td>
-                    <td>FirstName</td>
-                    <td>LastName</td>
-                    <td class>state</td>
-                    <td>Specailizastion</td>
-                    <td>{{ list.date | date}}</td>
-                    <td>{{ list.time }}</td>
+                    <td>{{list.firstname}}</td>
+                    <td>{{list.lastname}}</td>
+                    <td>{{list.state}}</td>
+                    <td>{{list.specialization}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -46,8 +42,11 @@ export default {
       lists: {},
       form: new Form({
         id: "",
-        date: "",
-        time: ""
+        firstname: "",
+        lastname: "",
+        email: "",
+        state: "",
+        specialization: ""
       })
     };
   },

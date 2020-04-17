@@ -99,11 +99,11 @@
                       data-style="btn btn-link"
                       id="doctor"
                     >
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                      <option>John James</option>
+                      <option>Jesse Kaffoi</option>
+                      <option>Jane Epok</option>
+                      <option>Aliyu Muhammed</option>
+                      <option>Lawal Abdulahi</option>
                     </select>
                     <has-error :form="form" field="doctor"></has-error>
                   </div>
@@ -122,14 +122,21 @@
 
                   <div class="form-group">
                     <label for="time" class="text-primary">Time</label>
-                    <input
-                      type="text"
+                    <select
                       v-model="form.time"
-                      class="form-control"
+                      class="form-control selectpicker"
                       :class="{ 'is-invalid': form.errors.has('time') }"
+                      data-style="btn btn-link"
                       id="time"
                       name="time"
-                    />
+                    >
+                      <option selected>8:00am</option>
+                      <option>10:00am</option>
+                      <option>12:00am</option>
+                      <option>2:00pm</option>
+                      <option>4:00pm</option>
+                      <option>6:00pm</option>
+                    </select>
                     <has-error :form="form" field="time"></has-error>
                   </div>
 

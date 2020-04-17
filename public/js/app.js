@@ -6440,6 +6440,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6963,18 +6970,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       lists: {},
       form: new Form({
         id: "",
-        date: "",
-        time: ""
+        firstname: "",
+        lastname: "",
+        email: "",
+        state: "",
+        specialization: ""
       })
     };
   },
@@ -7289,10 +7295,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      lists: {},
+      form: new Form({
+        id: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        state: "",
+        specialization: ""
+      })
+    };
+  },
+  methods: {
+    getActiveDoctors: function getActiveDoctors() {
+      var _this = this;
+
+      axios.get("api/getactive").then(function (_ref) {
+        var data = _ref.data;
+        return _this.lists = data;
+      })["catch"](function () {
+        _this.$Progress.fail(); // this.$toast.error(
+        //   "Oops, something went wrong, fail to load appoimtments"
+        // );
+
+      });
+    }
+  },
   mounted: function mounted() {
+    this.getActiveDoctors();
     console.log("Component mounted.");
   }
 });
@@ -86165,15 +86198,15 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("option", [_vm._v("1")]),
+                                _c("option", [_vm._v("John James")]),
                                 _vm._v(" "),
-                                _c("option", [_vm._v("2")]),
+                                _c("option", [_vm._v("Jesse Kaffoi")]),
                                 _vm._v(" "),
-                                _c("option", [_vm._v("3")]),
+                                _c("option", [_vm._v("Jane Epok")]),
                                 _vm._v(" "),
-                                _c("option", [_vm._v("4")]),
+                                _c("option", [_vm._v("Aliyu Muhammed")]),
                                 _vm._v(" "),
-                                _c("option", [_vm._v("5")])
+                                _c("option", [_vm._v("Lawal Abdulahi")])
                               ]
                             ),
                             _vm._v(" "),
@@ -86246,34 +86279,63 @@ var render = function() {
                               [_vm._v("Time")]
                             ),
                             _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.time,
-                                  expression: "form.time"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              class: {
-                                "is-invalid": _vm.form.errors.has("time")
-                              },
-                              attrs: { type: "text", id: "time", name: "time" },
-                              domProps: { value: _vm.form.time },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.time,
+                                    expression: "form.time"
                                   }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "time",
-                                    $event.target.value
-                                  )
+                                ],
+                                staticClass: "form-control selectpicker",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has("time")
+                                },
+                                attrs: {
+                                  "data-style": "btn btn-link",
+                                  id: "time",
+                                  name: "time"
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.form,
+                                      "time",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
                                 }
-                              }
-                            }),
+                              },
+                              [
+                                _c("option", { attrs: { selected: "" } }, [
+                                  _vm._v("8:00am")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("10:00am")]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("12:00am")]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("2:00pm")]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("4:00pm")]),
+                                _vm._v(" "),
+                                _c("option", [_vm._v("6:00pm")])
+                              ]
+                            ),
                             _vm._v(" "),
                             _c("has-error", {
                               attrs: { form: _vm.form, field: "time" }
@@ -87099,17 +87161,13 @@ var render = function() {
                     return _c("tr", { key: list.id }, [
                       _c("td", [_vm._v(_vm._s(list.id))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v("FirstName")]),
+                      _c("td", [_vm._v(_vm._s(list.firstname))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v("LastName")]),
+                      _c("td", [_vm._v(_vm._s(list.lastname))]),
                       _vm._v(" "),
-                      _c("td", {}, [_vm._v("state")]),
+                      _c("td", [_vm._v(_vm._s(list.state))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v("Specailizastion")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(_vm._f("date")(list.date)))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(list.time))])
+                      _c("td", [_vm._v(_vm._s(list.specialization))])
                     ])
                   }),
                   0
@@ -87150,11 +87208,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("State")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Specailizastion")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Date")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Time")])
+      _c("th", [_vm._v("Specailizastion")])
     ])
   }
 ]
@@ -87409,75 +87463,73 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header card-header-primary" }, [
-              _c("h4", { staticClass: "card-title text-uppercase" }, [
-                _vm._v("Doctors Available")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-category" }, [
-                _vm._v("Here is a list of Doctors on seat")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "table-responsive" }, [
-                _c("table", { staticClass: "table" }, [
-                  _c("thead", { staticClass: "text-primary" }, [
-                    _c("th", [_vm._v("ID")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("FirstName")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("LastName")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Email")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("State")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Specialization")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Time")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("td", [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Dakota Rice")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Niger")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Oud-Turnhout")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }, [
-                        _vm._v("$36,738")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" }),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-primary" })
-                    ])
-                  ])
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("tbody", [
+                  _vm.list in _vm.lists
+                    ? _c("tr", { key: _vm.list.id }, [
+                        _c("td", [_vm._v(_vm._s(_vm.list.id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.list.firstname))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.list.lastname))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.list.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.list.state))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.list.specialization))])
+                      ])
+                    : _vm._e()
                 ])
               ])
             ])
           ])
         ])
       ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header card-header-primary" }, [
+      _c("h4", { staticClass: "card-title text-uppercase" }, [
+        _vm._v("Doctors Available")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-category" }, [
+        _vm._v("Here is a list of Doctors on seat")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "text-primary" }, [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("FirstName")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("LastName")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("State")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Specialization")])
     ])
   }
 ]

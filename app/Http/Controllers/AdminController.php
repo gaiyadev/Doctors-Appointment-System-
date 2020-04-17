@@ -41,10 +41,12 @@ class AdminController extends Controller
 //... fetch all appt
     public function allAppointment() {
         return Appointment::all();
+       // return Appointment::orderBy('email', 'asc')->paginate(6);
+
     }
 
      public function seat() {
-        return TiME::all();
+        return Admin::all();
     }
     
     // public function index() {

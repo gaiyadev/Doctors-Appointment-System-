@@ -17,18 +17,15 @@
                   <th>Email</th>
                   <th>State</th>
                   <th>Specialization</th>
-                  <th>Time</th>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Dakota Rice</td>
-                    <td>Niger</td>
-                    <td>Oud-Turnhout</td>
-                    <td class="text-primary">$36,738</td>
-                    <td class="text-primary">$36,738</td>
-                    <td class="text-primary"></td>
-                    <td class="text-primary"></td>
+                  <tr v-if="list in lists" :key="list.id">
+                    <td>{{ list.id }}</td>
+                    <td>{{ list.firstname }}</td>
+                    <td>{{ list.lastname }}</td>
+                    <td>{{ list.email }}</td>
+                    <td>{{ list.state }}</td>
+                    <td>{{ list.specialization }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -40,10 +37,40 @@
   </div>
 </template>
 
+
 <script>
 export default {
+  data() {
+    return {
+      lists: {},
+      form: new Form({
+        id: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        state: "",
+        specialization: ""
+      })
+    };
+  },
+  methods: {
+    getActiveDoctors() {
+      axios
+        .get("api/getactive")
+        .then(({ data }) => (this.lists = data))
+        .catch(() => {
+          this.$Progress.fail();
+          // this.$toast.error(
+          //   "Oops, something went wrong, fail to load appoimtments"
+          // );
+        });
+    }
+  },
+
   mounted() {
+    this.getActiveDoctors();
     console.log("Component mounted.");
   }
 };
 </script>
+
