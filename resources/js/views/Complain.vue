@@ -170,7 +170,7 @@ export default {
         if (result.value) {
           this.$Progress.start();
           this.form
-            .delete("api/complain/" + id)
+            .delete("complain/" + id)
             .then(() => {
               this.$toast.success("Complain Deleted succesfully");
             })

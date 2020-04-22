@@ -42,9 +42,7 @@ class ComplainController extends Controller
     }
 
     
-      public function destroy($id)
-    {
-        
+      public function destroy($id)    {        
         $Complain =  Complain::find($id);
         $Complain->delete();
         return ['message' => 'Complaint Deleted'];

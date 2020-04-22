@@ -73,8 +73,6 @@ class AppointmentController extends Controller
        $Appointment->purpose = $request->input('purpose');
        $Appointment->user_id = auth()->user()->id;
        $Appointment->save();
-
-
         return ['message' => 'Post updated'];
     }
 

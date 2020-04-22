@@ -6835,7 +6835,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this3.$Progress.start();
 
-          _this3.form["delete"]("api/complain/" + id).then(function () {
+          _this3.form["delete"]("complain/" + id).then(function () {
             _this3.$toast.success("Complain Deleted succesfully");
           })["catch"](function () {
             _this3.$toast.error("Oops, something went wrong, fail to delete appoimtments");
@@ -7227,7 +7227,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          _this2.form["delete"]("api/appointment/" + id).then(function () {
+          _this2.form["delete"]("api/appointments/" + id).then(function () {
             _this2.$toast.success("Appointment Deleted succesfully");
 
             _this2.$Progress.finish();

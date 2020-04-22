@@ -69,7 +69,7 @@ Route::post('api/approve/{id}', 'ApprovedController@approve');
 
 //fetch from user table
 Route::get('api/user/all', 'AdminController@allAppointment');
-Route::delete('api/appointment/{id}', 'AdminController@destroyA');
+Route::delete('api/appointments/{id}', 'AdminController@destroyA');
 
 //..get use email
 //Route::get('api/userEmail', 'AppointmentController@getEmail');
@@ -77,7 +77,7 @@ Route::delete('api/appointment/{id}', 'AdminController@destroyA');
 //complain
 Route::post('api/complain', 'ComplainController@store');
 Route::get('api/complain', 'ComplainController@index');
-Route::delete('api/complain/{id}', 'ComplainController@destroy');
+Route::delete('complain/{id}', 'ComplainController@destroy');
 
 
 //change password for user

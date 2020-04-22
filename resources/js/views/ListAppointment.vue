@@ -108,7 +108,7 @@ export default {
         if (result.value) {
           this.$Progress.start();
           this.form
-            .delete("api/appointment/" + id)
+            .delete("api/appointments/" + id)
             .then(() => {
               this.$toast.success("Appointment Deleted succesfully");
               this.$Progress.finish();
