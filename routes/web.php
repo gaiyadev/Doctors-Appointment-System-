@@ -77,7 +77,7 @@ Route::delete('api/appointments/{id}', 'AdminController@destroyA');
 //complain
 Route::post('api/complain', 'ComplainController@store');
 Route::get('api/complain', 'ComplainController@index');
-Route::delete('complain/{id}', 'ComplainController@destroy');
+Route::delete('api/complain/{id}', 'ComplainController@destroy');
 
 
 //change password for user

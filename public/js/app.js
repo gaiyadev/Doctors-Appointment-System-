@@ -6835,7 +6835,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this3.$Progress.start();
 
-          _this3.form["delete"]("complain/" + id).then(function () {
+          _this3.form["delete"]("api/complain/" + id).then(function () {
             _this3.$toast.success("Complain Deleted succesfully");
           })["catch"](function () {
             _this3.$toast.error("Oops, something went wrong, fail to delete appoimtments");
@@ -87302,7 +87302,7 @@ var render = function() {
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
-                            return _vm.deleteComplain(_vm.complain.id)
+                            return _vm.deleteComplain(Complain.id)
                           }
                         }
                       },

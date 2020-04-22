@@ -30,7 +30,7 @@
                 <td>{{ Complain.complain }}</td>
                 <td>{{ Complain.created_at | date }}</td>
                 <td class="text-primary">
-                  <button @click="deleteComplain(complain.id)" type="button" class="btn btn-danger">
+                  <button @click="deleteComplain(Complain.id)" type="button" class="btn btn-danger">
                     <span class="material-icons">remove_circle</span>
                   </button>
                 </td>
@@ -170,7 +170,7 @@ export default {
         if (result.value) {
           this.$Progress.start();
           this.form
-            .delete("complain/" + id)
+            .delete("api/complain/" + id)
             .then(() => {
               this.$toast.success("Complain Deleted succesfully");
             })
